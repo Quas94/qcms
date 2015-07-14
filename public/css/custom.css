@@ -1,3 +1,10 @@
+/* Custom CSS on top of bootstrap */
+
+/* This is so that the scrollbar will always be present regardless of page height */
+html {
+    overflow-y: scroll;
+}
+
 body {
     background-image: url('../images/background.jpg');
     background-repeat: no-repeat;
@@ -14,6 +21,10 @@ body {
 
 .panel-main {
     text-align: justify;
+}
+
+.no-padding-div {
+    padding: 0px 0px 0px 0px;
 }
 
 #header-jumbotron {
