@@ -1,0 +1,25 @@
+/**
+ * Controller for post-related stuff
+ */
+
+var PostModel = require('../models/post.model').model;
+
+var getPostsInternal = function(req, res) {
+    PostModel.find(function(err, posts) {
+        if (err) res.send(err);
+
+        res.json(posts);
+    });
+};
+
+exports.getPosts = getPostsInternal;
+
+exports.createPost = function(req, res) {
+    PostModel.create({
+        title: req.body.title,
+        body: req.body.body
+    }, function(err, posts) {
+        if (err) res.send(err);
+        getPostsInternal(req, res);
+    })
+};
