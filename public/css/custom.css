@@ -1,5 +1,10 @@
 /* Custom CSS on top of bootstrap */
 
+/* This is for Angular's version of bootstrap js */
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
+
 /* This is so that the scrollbar will always be present regardless of page height */
 html {
     overflow-y: scroll;
