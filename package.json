@@ -12,6 +12,7 @@
     "ejs": "~2.3.2",
     "express": "~4.13.0",
     "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "angular-route": "~1.4.0"
   }
 }

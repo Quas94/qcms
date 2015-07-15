@@ -34,7 +34,8 @@ setRoute('post');
 
 // front end
 setRoute('create');
-setRoute('home');
+setRoute('main'); // includes home, about, ...
+setRoute('view'); // views
 setRoute('index');
 
 // catch 404 and forward to error handler

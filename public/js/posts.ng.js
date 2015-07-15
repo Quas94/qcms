@@ -1,4 +1,24 @@
-var posts = angular.module('posts', []);
+var posts = angular.module('posts', [
+    'ngRoute'
+]);
+
+posts.config(['$routeProvider', '$locationProvider',
+    function($routeProvider, $locationProvider) {
+        $routeProvider.
+            when('/home', {
+                templateUrl: '/view/home'
+                //controller: 'posts'
+            }).
+            when('/about', {
+                templateUrl: '/view/about'
+                //controller: 'posts'
+            }).
+            otherwise({
+                //redirectTo: '/404'
+            });
+
+        $locationProvider.html5Mode(true);
+    }]);
 
 posts.controller('postsCtrl', ['$scope', '$http',
 

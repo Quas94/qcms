@@ -23,3 +23,12 @@ exports.createPost = function(req, res) {
         getPostsInternal(req, res);
     })
 };
+
+exports.deletePost = function(req, res) {
+    PostModel.remove({
+        _id: req.params.postId
+    }, function(err, posts) {
+        if (err) res.send(err);
+        getPostsInternal(req, res);
+    });
+}

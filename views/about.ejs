@@ -1,12 +1,12 @@
-<!-- Front page -->
-<div class="no-padding-div collapse in" id="page-home" ng-controller="postsCtrl">
-    <div class="col-md-9 pull-right" ng-repeat="post in posts">
+<!-- About me page -->
+<div class="no-padding-div collapse in" id="page-about">
+    <div class="col-md-9 pull-right">
         <div class="panel panel-default panel-main">
             <div class="panel-heading">
-                <h3 class="panel-title"><a data-toggle="collapse" href="#{{post._id}}">{{post.title}}</a></h3>
+                <h3 class="panel-title"><a data-toggle="collapse" href="#about-main">About Me</a></h3>
             </div>
             <!-- panel-body-wrapper div necessary to prevent jumpy animation of collapse due to panel padding -->
-            <div class="no-padding-div collapse in" id="{{post._id}}">
+            <div class="no-padding-div collapse in" id="about-main">
                 <div class="panel-body">
                     <p>{{post.body}}</p>
                 </div>
@@ -14,4 +14,4 @@
         </div>
     </div>
 </div>
-<!-- End front page -->
+<!-- End about me page -->
