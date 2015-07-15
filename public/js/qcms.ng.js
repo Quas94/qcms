@@ -46,7 +46,7 @@ qcms.controller('qcmsCtrl', ['$scope', '$http', '$location', '$rootScope', '$tim
                 console.log("Timed out, row collapsed was: " + $scope.rowCollapsed);
                 $scope.rowCollapsed = false;
             }, 100);
-        })
+        });
 
         // upon landing on the page, get all posts and show
         $http.get('/post')
