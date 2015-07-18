@@ -1,16 +1,13 @@
 <!-- Front page -->
 <div class="no-padding-div" id="page-home">
-    <div class="col-md-9 pull-right" ng-repeat="post in posts">
+    <div class="col-md-9 pull-right">
         <div class="panel panel-default panel-main">
             <div class="panel-heading">
-                <a class="post-link" href="/posts/{{post._id}}"><h3 class="panel-title post-link">{{post.title}}</h3></a>
+                <h3 class="panel-title">Welcome to qCMS!</h3>
             </div>
             <div class="panel-body">
-                <p class="post-author-date">posted by {{post.author}} on {{post.date}}</p>
-                <p>{{post.body}}</p>
-            </div>
-            <div class="panel-footer">
-                <a class="post-link" href="/posts/{{post._id}}#comments">{{post.comments.length}} comments</a>
+                <p>This is the frontpage. It's going to have the most recent blog posts as well as other important
+                stuff on it.</p>
             </div>
         </div>
     </div>

@@ -32,7 +32,7 @@
   <script src="/js/qcms.ng.js"></script>
 
 </head>
-<body role="document" ng-controller="qcmsCtrl">
+<body role="document" ng-controller="mainCtrl">
 <!-- Container for entire page -->
 <div class="container" role="main">
   <!-- Header  -->
@@ -56,9 +56,9 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li ng-class="navbarActive.home"><a href="/home">Home</a></li>
+          <li ng-class="navbarActive.blog"><a href="/blog">Blog</a></li>
           <li ng-class="navbarActive.about"><a href="/about">About Me</a></li>
           <!--
-          <li><a href="#">Blog</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Portfolio <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -74,7 +74,7 @@
             </ul>
           </li>
           -->
-          <li><a href="#">Contact</a></li>
+          <li ng-class="navbarActive.contact"><a href="/contact">Contact</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
