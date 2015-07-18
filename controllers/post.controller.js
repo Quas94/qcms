@@ -17,7 +17,9 @@ exports.getPosts = getPostsInternal;
 exports.createPost = function(req, res) {
     PostModel.create({
         title: req.body.title,
-        body: req.body.body
+        body: req.body.body,
+        author: req.body.author,
+        date: Date.now()
     }, function(err, posts) {
         if (err) res.send(err);
         getPostsInternal(req, res);

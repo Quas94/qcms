@@ -56,6 +56,18 @@ qcms.controller('qcmsCtrl', ['$scope', '$http', '$location', '$rootScope', '$tim
 
                 // show posts
                 $scope.posts = data;
+                // for all posts, convert Date object into formatted string for display on page
+                for (var i in $scope.posts) {
+                    var date = new Date($scope.posts[i].date);
+                    var hours = date.getHours();
+                    var mins = date.getMinutes();
+                    if (mins < 10) mins = '0' + mins;
+                    var meridian = 'AM';
+                    if (hours >= 12) meridian = 'PM';
+                    if (hours > 12) hours -= 12;
+                    var display = date.toLocaleDateString() + ', ' + hours + ':' + mins + ' ' + meridian;
+                    $scope.posts[i].date = display;
+                }
             })
             .error(function(data) {
                 console.log('Error: ' + data);
