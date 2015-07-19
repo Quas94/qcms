@@ -85,11 +85,6 @@ qcms.controller('blogCtrl', ['$scope', '$http', '$location',
                     return new Date(b.date) - new Date(a.date);
                 });
 
-                // for all posts, convert Date object into formatted string for display on page
-                for (var i in data) {
-                    data[i].date = formatDate(data[i].date);
-                }
-
                 // show posts
                 $scope.posts = data;
             })
@@ -128,8 +123,12 @@ qcms.controller('blogCtrl', ['$scope', '$http', '$location',
 
 qcms.controller('blogPostCtrl', ['$scope', '$http', '$location',
     function($scope, $http, $location) {
+        $scope.commentData = {};
+        $scope.postCommentClicked = false;
+
         var path = $location.path();
         path = path.replace('/blog', '');
+        $scope.postId = path.replace('/', '');
         path = '/post' + path;
 
         // upon page load, fetch info for this blog post
@@ -138,11 +137,29 @@ qcms.controller('blogPostCtrl', ['$scope', '$http', '$location',
                 if (data.length !== 1) {
                     console.log('Error: tried to load a single post, but json array length was ' + data.length);
                 }
-                var post = data[0];
-                post.date = formatDate(post.date);
-                $scope.post = post;
+                $scope.post = data[0];
             })
             .error(function (error) {
                 console.log('blogPostCtrl error on fetching post: ' + error);
             });
+
+        // posting comments
+        $scope.postComment = function() {
+            console.log('Posting comment');
+            // disable button to prevent lag-induced repeated submissions
+            $scope.postCommentClicked = true;
+
+            $http.post('/post/' + $scope.postId + '/comment', {
+                author: $scope.commentData.author,
+                body: $scope.commentData.body
+            })
+                .success(function(data) {
+                    $scope.commentData = {}; // clear comment form fields
+                    $scope.postCommentClicked = false; // re-enable post comment button
+                    $scope.post = data;
+                })
+                .error(function(error) {
+                    console.log('Error posting comment: ' + error);
+                })
+        }
     }]);
