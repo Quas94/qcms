@@ -8,8 +8,8 @@ qcms.config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
         $routeProvider.
             when('/home', {
-                templateUrl: '/view/home'
-                // controller: 'qcmsCtrl'
+                templateUrl: '/view/home',
+                controller: 'generalCtrl'
             }).
             when('/blog/:id', {
                 templateUrl: function(urlAttr) {
@@ -22,12 +22,12 @@ qcms.config(['$routeProvider', '$locationProvider',
                 controller: 'blogCtrl'
             }).
             when('/about', {
-                templateUrl: '/view/about'
-                // controller: 'qcmsCtrl'
+                templateUrl: '/view/about',
+                controller: 'generalCtrl'
             }).
             when('/contact', {
-                templateUrl: '/view/contact'
-                // controller: 'qcmsCtrl'
+                templateUrl: '/view/contact',
+                controller: 'generalCtrl'
             }).
             otherwise({
                 // redirectTo: '/404'
@@ -36,28 +36,43 @@ qcms.config(['$routeProvider', '$locationProvider',
         $locationProvider.html5Mode(true);
     }]);
 
-qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$timeout', '$location',
-    function($scope, $http, $rootScope, $timeout, $location) {
-        $scope.rowCollapsed = true;
+qcms.factory('row', function() {
+    var rowService = {};
+
+    rowService.isCollapsed = true; // initialises to collapsed
+
+    return rowService;
+});
+
+qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$interval', '$timeout', '$location', 'row',
+    function($scope, $http, $rootScope, $interval, $timeout, $location, row) {
+        $scope.rowCollapsed = row.isCollapsed;
         // callback for location change events
         $rootScope.$on('$locationChangeStart', function(event, newUrl, oldUrl) {
+            // set row collapsed flags for both this scope and globally to true
+            row.isCollapsed = true;
             $scope.rowCollapsed = true;
-            console.log('Starting to change (from: ' + oldUrl + ', to: ' + newUrl);
+            // check several times per second to see if row.isCollapsed has been set to true, and update scope if so
+            var updateRow = $interval(function() {
+                console.log('Interval checking');
+                if (!row.isCollapsed) {
+                    $interval.cancel(updateRow);
+                    $timeout(function() {
+                        $scope.rowCollapsed = false;
+                    }, 100);
+                }
+            }, 200);
         });
         $rootScope.$on('$locationChangeSuccess', function(event, newUrl, oldUrl) {
-            console.log('Change successful!');
-            $timeout(function() {
-                $scope.rowCollapsed = false;
-            }, 100);
+            // location change successful. don't really need this callback anymore... placeholder for now
         });
 
         $scope.active = function(page) {
             var path = $location.path().replace('/', '');
             var string = '^' + page + '.*$';
             var regex = new RegExp(string, 'i');
-            // console.log('regex string is ' + string + ', page = ' + page + ', matches = ' + regex.test(page));
             return regex.test(path) ? 'active' : '';
-        }
+        };
 
         $scope.formatDate = function(dateStr) {
             var date = new Date(dateStr);
@@ -69,12 +84,17 @@ qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$timeout', '$loca
             if (hours > 12) hours -= 12;
             var display = date.toLocaleDateString() + ', ' + hours + ':' + mins + ' ' + meridian;
             return display;
-        }
+        };
     }]);
 
-qcms.controller('blogCtrl', ['$scope', '$http', '$location',
+qcms.controller('generalCtrl', ['row',
+    function(row) {
+        row.isCollapsed = false;
+    }]);
 
-    function($scope, $http, $location) {
+qcms.controller('blogCtrl', ['$scope', '$http', 'row',
+
+    function($scope, $http, row) {
         $scope.formData = {};
 
         // upon landing on the page, get all posts and show
@@ -87,6 +107,8 @@ qcms.controller('blogCtrl', ['$scope', '$http', '$location',
 
                 // show posts
                 $scope.posts = data;
+                // set row service collapsed to false
+                row.isCollapsed = false;
             })
             .error(function(data) {
                 console.log('Error: ' + data);
@@ -121,8 +143,8 @@ qcms.controller('blogCtrl', ['$scope', '$http', '$location',
         };
     }]);
 
-qcms.controller('blogPostCtrl', ['$scope', '$http', '$location',
-    function($scope, $http, $location) {
+qcms.controller('blogPostCtrl', ['$scope', '$http', '$location', 'row',
+    function($scope, $http, $location, row) {
         $scope.commentData = {};
         $scope.postCommentClicked = false;
         $scope.commentMessage = '';
@@ -139,6 +161,8 @@ qcms.controller('blogPostCtrl', ['$scope', '$http', '$location',
                     console.log('Error: tried to load a single post, but json array length was ' + data.length);
                 }
                 $scope.post = data[0];
+                // set row service collapsed to false
+                row.isCollapsed = false;
             })
             .error(function (error) {
                 console.log('blogPostCtrl error on fetching post: ' + error);

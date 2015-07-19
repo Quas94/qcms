@@ -23,6 +23,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // session config
 app.use(session({
   secret: 'quasKEY 555',
+  resave: false,
+  saveUninitialized: true,
   cookie: {
     maxAge: 1800000 // half an hour
   }
