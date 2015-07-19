@@ -1,0 +1,33 @@
+<!doctype html>
+<html ng-app="create">
+<head>
+  <!-- META -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Admin login</title>
+
+  <!-- JS -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+  <script src="/js/create.ng.js"></script>
+</head>
+<body ng-controller="createCtrl">
+<div class="container">
+
+  <!-- Create post form -->
+  <div id="new-post-form" class="row">
+    <div class="col-sm-8 col-sm-offset-2 text-center">
+      <form>
+        <div class="form-group">
+          <input type="text" class="form-control input-lg text-center" placeholder="username" ng-model="formData.username">
+          <input type="password" class="form-control input-lg text-center" placeholder="password" ng-model="formData.password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" ng-click="login()">Login</button>
+        <p style="color:red;">{{ message }}</p>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

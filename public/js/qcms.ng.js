@@ -125,6 +125,7 @@ qcms.controller('blogPostCtrl', ['$scope', '$http', '$location',
     function($scope, $http, $location) {
         $scope.commentData = {};
         $scope.postCommentClicked = false;
+        $scope.commentMessage = '';
 
         var path = $location.path();
         path = path.replace('/blog', '');
@@ -145,21 +146,27 @@ qcms.controller('blogPostCtrl', ['$scope', '$http', '$location',
 
         // posting comments
         $scope.postComment = function() {
-            console.log('Posting comment');
             // disable button to prevent lag-induced repeated submissions
             $scope.postCommentClicked = true;
-
-            $http.post('/post/' + $scope.postId + '/comment', {
-                author: $scope.commentData.author,
-                body: $scope.commentData.body
-            })
-                .success(function(data) {
-                    $scope.commentData = {}; // clear comment form fields
-                    $scope.postCommentClicked = false; // re-enable post comment button
-                    $scope.post = data;
-                })
-                .error(function(error) {
+            $scope.commentMessage = '';
+            // check input for validity
+            var author = $scope.commentData.author;
+            var comment = $scope.commentData.body;
+            if (author != undefined && author.length > 0 && comment != undefined && comment.length > 0) {
+                $http.post('/post/' + $scope.postId + '/comment', {
+                    author: $scope.commentData.author,
+                    body: $scope.commentData.body
+                }).success(function (data) {
+                        $scope.commentData = {}; // clear comment form fields
+                        $scope.postCommentClicked = false; // re-enable post comment button
+                        $scope.post = data;
+                }).error(function (error) {
                     console.log('Error posting comment: ' + error);
-                })
+                });
+            } else {
+                // invalid input
+                $scope.postCommentClicked = false;
+                $scope.commentMessage = 'Invalid comment input. Please check your response and try again.';
+            }
         }
     }]);

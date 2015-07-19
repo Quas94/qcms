@@ -1,9 +1,10 @@
 var create = angular.module('create', []);
 
-create.controller('createCtrl', ['$scope', '$http',
+create.controller('createCtrl', ['$scope', '$http', '$window',
 
-    function($scope, $http) {
+    function($scope, $http, $window) {
         $scope.formData = {};
+        $scope.message = '';
 
         // upon landing on the page, get all posts and show
         $http.get('/post')
@@ -42,4 +43,22 @@ create.controller('createCtrl', ['$scope', '$http',
                     console.log('Error: ' + data);
                 });
         };
+
+        // login
+        $scope.login = function() {
+            $http.post('/login', {
+                username: $scope.formData.username,
+                password: $scope.formData.password
+            }).success(function(data) {
+                if (data === 'Success') {
+                    $window.location.href = '/admin';
+                } else if ($scope.message != '') {
+                    $scope.message += '!';
+                } else {
+                    $scope.message = data;
+                }
+            }).error(function(err) {
+                console.log('Error trying to login: ' + err);
+            });
+        }
     }]);

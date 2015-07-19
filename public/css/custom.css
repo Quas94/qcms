@@ -16,6 +16,10 @@ body {
     background-attachment: fixed;
 }
 
+.help-block {
+    color: #ff0000;
+}
+
 .p-author-date {
     color: rgba(0, 0, 0, 0.6);
     font-size: small;
@@ -30,8 +34,8 @@ body {
 .panel-footer {
     color: rgba(0, 0, 0, 0.6);
     font-size: small;
-    height: 20px;
-    line-height: 18px;
+    height: 25px;
+    line-height: 24px;
     padding-top: 0px;
 }
 
