@@ -39,12 +39,10 @@ qcms.config(['$routeProvider', '$locationProvider',
 qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$timeout', '$location',
     function($scope, $http, $rootScope, $timeout, $location) {
         $scope.rowCollapsed = true;
-        $scope.navbarActive = {};
         // callback for location change events
         $rootScope.$on('$locationChangeStart', function(event, newUrl, oldUrl) {
             $scope.rowCollapsed = true;
             console.log('Starting to change (from: ' + oldUrl + ', to: ' + newUrl);
-            updatePage($scope, $location.path());
         });
         $rootScope.$on('$locationChangeSuccess', function(event, newUrl, oldUrl) {
             console.log('Change successful!');
@@ -52,6 +50,26 @@ qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$timeout', '$loca
                 $scope.rowCollapsed = false;
             }, 100);
         });
+
+        $scope.active = function(page) {
+            var path = $location.path().replace('/', '');
+            var string = '^' + page + '.*$';
+            var regex = new RegExp(string, 'i');
+            // console.log('regex string is ' + string + ', page = ' + page + ', matches = ' + regex.test(page));
+            return regex.test(path) ? 'active' : '';
+        }
+
+        $scope.formatDate = function(dateStr) {
+            var date = new Date(dateStr);
+            var hours = date.getHours();
+            var mins = date.getMinutes();
+            if (mins < 10) mins = '0' + mins;
+            var meridian = 'AM';
+            if (hours >= 12) meridian = 'PM';
+            if (hours > 12) hours -= 12;
+            var display = date.toLocaleDateString() + ', ' + hours + ':' + mins + ' ' + meridian;
+            return display;
+        }
     }]);
 
 qcms.controller('blogCtrl', ['$scope', '$http', '$location',
@@ -62,9 +80,6 @@ qcms.controller('blogCtrl', ['$scope', '$http', '$location',
         // upon landing on the page, get all posts and show
         $http.get('/post')
             .success(function(data) {
-                // set correct navbar element to active
-                updatePage($scope, $location.path());
-
                 // sort posts in order of post date, newest first
                 data.sort(function(a, b) {
                     return new Date(b.date) - new Date(a.date);
@@ -72,15 +87,7 @@ qcms.controller('blogCtrl', ['$scope', '$http', '$location',
 
                 // for all posts, convert Date object into formatted string for display on page
                 for (var i in data) {
-                    var date = new Date(data[i].date);
-                    var hours = date.getHours();
-                    var mins = date.getMinutes();
-                    if (mins < 10) mins = '0' + mins;
-                    var meridian = 'AM';
-                    if (hours >= 12) meridian = 'PM';
-                    if (hours > 12) hours -= 12;
-                    var display = date.toLocaleDateString() + ', ' + hours + ':' + mins + ' ' + meridian;
-                    data[i].date = display;
+                    data[i].date = formatDate(data[i].date);
                 }
 
                 // show posts
@@ -119,12 +126,23 @@ qcms.controller('blogCtrl', ['$scope', '$http', '$location',
         };
     }]);
 
-function updatePage($scope, path) {
-    var path = path.replace('/', '');
-    // debug log path
-    console.log('Path is: ' + path);
-    for (var key in $scope.navbarActive) {
-        $scope.navbarActive[key] = '';
-    }
-    $scope.navbarActive[path] = 'active';
-}
+qcms.controller('blogPostCtrl', ['$scope', '$http', '$location',
+    function($scope, $http, $location) {
+        var path = $location.path();
+        path = path.replace('/blog', '');
+        path = '/post' + path;
+
+        // upon page load, fetch info for this blog post
+        $http.get(path)
+            .success(function(data) {
+                if (data.length !== 1) {
+                    console.log('Error: tried to load a single post, but json array length was ' + data.length);
+                }
+                var post = data[0];
+                post.date = formatDate(post.date);
+                $scope.post = post;
+            })
+            .error(function (error) {
+                console.log('blogPostCtrl error on fetching post: ' + error);
+            });
+    }]);

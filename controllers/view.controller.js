@@ -6,9 +6,8 @@ exports.home = function(req, res) {
     res.render('home');
 };
 
-exports.blogSpecific = function(req, res) {
-    console.log('reached blog specific: ' + req.params.id);
-    res.render('blogpost');
+exports.blogPost = function(req, res) {
+    res.render('blog_post');
 };
 
 exports.blog = function(req, res) {

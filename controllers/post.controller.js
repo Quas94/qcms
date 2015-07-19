@@ -14,6 +14,16 @@ var getPostsInternal = function(req, res) {
 
 exports.getPosts = getPostsInternal;
 
+exports.getSinglePost = function(req, res) {
+    PostModel.find({
+        _id: req.params.postId
+    }, function(err, post) {
+        if (err) res.send(err);
+
+        res.json(post);
+    });
+};
+
 exports.createPost = function(req, res) {
     PostModel.create({
         title: req.body.title,
