@@ -33,6 +33,10 @@ exports.createComment = function(req, res) {
 
     // check types to prevent exploits and injections
     if (typeof author === 'string' && typeof body === 'string') {
+        // if not logged in as admin, prevent html markup in comment
+        if (req.session.loggedIn != true) {
+            body = convertSymbols(body);
+        }
         // split up body into paragraphs according to double newline
         body = splitIntoParagraphs(body);
 
@@ -104,4 +108,19 @@ function splitIntoParagraphs(body) {
         paragraphs = paragraphs.concat('<p>' + body[i] + '</p>');
     }
     return paragraphs;
+}
+
+/**
+ * Converts HTML markup symbols into their respective &lt; and &gt; notations. Used for comments only, as admin posts
+ * can embed HTML tags freely.
+ */
+function convertSymbols(body) {
+    // ampersand first because it's contained in the &symbols;
+    body = body.replace(new RegExp('&', 'g'), '&amp;');
+    // then the rest
+    body = body.replace(new RegExp('<', 'g'), '&lt;');
+    body = body.replace(new RegExp('>', 'g'), '&gt;');
+    body = body.replace(new RegExp('\'', 'g'), '&apos;');
+    body = body.replace(new RegExp('"', 'g'), '&quot;');
+    return body;
 }

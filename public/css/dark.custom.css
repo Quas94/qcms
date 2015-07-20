@@ -27,6 +27,10 @@ body {
     padding-bottom: 5px;
 }
 
+.panel-title {
+    color: rgba(255, 255, 255, 0.75);
+}
+
 .panel-footer {
     font-size: small;
     height: 25px;
