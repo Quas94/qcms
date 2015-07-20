@@ -7,5 +7,5 @@ exports.changeTheme = function(req, res) {
     } else {
         req.session.theme = dark;
     }
-    res.redirect('/home');
+    res.redirect('/' + req.params[0]);
 };

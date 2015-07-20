@@ -65,7 +65,6 @@ qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$interval', '$tim
             }, 200);
         });
         $rootScope.$on('$locationChangeSuccess', function(event, newUrl, oldUrl) {
-            // location change successful. don't really need this callback anymore... placeholder for now
         });
 
         $scope.active = function(page) {
@@ -88,7 +87,8 @@ qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$interval', '$tim
         };
 
         $scope.changeTheme = function() {
-            $window.location.href = '/theme/change';
+            // append $location.path() on end so the server knows where to redirect back to
+            $window.location.href = '/theme/change' + $location.path();
         };
     }]);
 

@@ -4,5 +4,5 @@
 var settingsCtrl = require('../controllers/settings.controller');
 
 module.exports = function(app) {
-    app.get('/theme/change', settingsCtrl.changeTheme);
+    app.get('/theme/change/*', settingsCtrl.changeTheme);
 };

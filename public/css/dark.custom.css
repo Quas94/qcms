@@ -21,6 +21,7 @@ body {
 }
 
 .p-author-date {
+    color: rgba(255, 255, 255, 0.2);
     font-size: small;
     font-style: italic;
     padding-bottom: 5px;
