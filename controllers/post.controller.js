@@ -33,6 +33,9 @@ exports.createComment = function(req, res) {
 
     // check types to prevent exploits and injections
     if (typeof author === 'string' && typeof body === 'string') {
+        // split up body into paragraphs according to double newline
+        body = splitIntoParagraphs(body);
+
         // actually update db
         PostModel.findOneAndUpdate({
             _id: req.params.postId
@@ -64,7 +67,7 @@ exports.createPost = function(req, res) {
     if (req.session.loggedIn === true) {
         PostModel.create({
             title: req.body.title,
-            body: req.body.body,
+            body: splitIntoParagraphs(req.body.body),
             author: req.body.author,
             date: Date.now()
         }, function (err, posts) {
@@ -89,4 +92,16 @@ exports.deletePost = function(req, res) {
             getPostsInternal(req, res);
         });
     }
+}
+
+/**
+ * Splits a body of text into paragraphs (adding p tag html markup) by splitting over double newline characters.
+ */
+function splitIntoParagraphs(body) {
+    body = body.split('\n\n');
+    var paragraphs = '';
+    for (var i = 0; i < body.length; i++) {
+        paragraphs = paragraphs.concat('<p>' + body[i] + '</p>');
+    }
+    return paragraphs;
 }

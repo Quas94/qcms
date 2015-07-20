@@ -1,6 +1,7 @@
 var qcms = angular.module('qcms', [
     'ngRoute',
     'ngAnimate',
+    'ngSanitize',
     'ui.bootstrap'
 ]);
 
@@ -141,6 +142,12 @@ qcms.controller('blogCtrl', ['$scope', '$http', 'row',
                     console.log('Error: ' + data);
                 });
         };
+
+        // trailing 's' on the end of 'comments'
+        $scope.getTrailingS = function(post) {
+            if (post.comments.length == 1) return '';
+            return 's';
+        };
     }]);
 
 qcms.controller('blogPostCtrl', ['$scope', '$http', '$location', 'row',
@@ -161,6 +168,7 @@ qcms.controller('blogPostCtrl', ['$scope', '$http', '$location', 'row',
                     console.log('Error: tried to load a single post, but json array length was ' + data.length);
                 }
                 $scope.post = data[0];
+
                 // set row service collapsed to false
                 row.isCollapsed = false;
             })

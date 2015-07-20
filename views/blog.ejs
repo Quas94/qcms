@@ -7,10 +7,10 @@
       </div>
       <div class="panel-body">
         <p class="p-author-date">posted by {{post.author}} on {{formatDate(post.date)}}</p>
-        <p>{{post.body}}</p>
+        <div ng-bind-html="post.body"></div>
       </div>
       <div class="panel-footer">
-        <a class="post-link" href="/blog/{{post._id}}#comments">{{post.comments.length}} comments</a>
+        <a class="post-link" href="/blog/{{post._id}}#comments">{{post.comments.length}} comment{{getTrailingS(post);}}</a>
       </div>
     </div>
   </div>

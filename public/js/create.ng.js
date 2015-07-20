@@ -1,4 +1,6 @@
-var create = angular.module('create', []);
+var create = angular.module('create', [
+        'ngSanitize'
+    ]);
 
 create.controller('createCtrl', ['$scope', '$http', '$window',
 

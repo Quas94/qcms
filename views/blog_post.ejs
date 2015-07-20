@@ -8,7 +8,7 @@
       </div>
       <div class="panel-body">
         <p class="p-author-date">posted by {{post.author}} on {{formatDate(post.date)}}</p>
-        <p>{{post.body}}</p>
+        <div ng-bind-html="post.body"></div>
       </div>
     </div>
 
@@ -19,7 +19,9 @@
         <div ng-repeat="comment in post.comments">
           <hr style="margin-top:10px;" />
           <p class="p-author-date">posted by {{comment.author}} on {{formatDate(comment.date)}}</p>
-          <p style="padding-bottom:10px;">{{comment.body}}</p>
+          <div ng-bind-html="comment.body"></div>
+          <!-- empty paragraph for padding -->
+          <p style="padding-bottom:5px;"></p>
         </div>
         <div ng-if="post.comments.length === 0">
           <hr style="margin-top:10px;" />
