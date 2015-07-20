@@ -24,9 +24,9 @@
   <!-- Bootstrap -->
   <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">-->
   <!-- Skinned bootstrap -->
-  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/<%= theme %>.bootstrap.min.css" rel="stylesheet">
   <!-- Custom overriding css -->
-  <link href="/css/custom.css" rel="stylesheet">
+  <link href="/css/<%= theme %>.custom.css" rel="stylesheet">
 
   <!-- Angular.js stuff -->
   <script src="/js/ui-bootstrap.min.js"></script>
@@ -59,22 +59,6 @@
           <li ng-class="active('home')"><a href="/home">Home</a></li>
           <li ng-class="active('blog')"><a href="/blog">Blog</a></li>
           <li ng-class="active('about')"><a href="/about">About Me</a></li>
-          <!--
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Portfolio <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li class="dropdown-header">Games</li>
-              <li><a href="#">MSG</a></li>
-              <li><a href="#">Days of Destiny</a></li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Software</li>
-              <li><a href="#">qCMS</a></li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Open source contributions</li>
-              <li><a href="#">LibreOffice (hopefully soon!)</a></li>
-            </ul>
-          </li>
-          -->
           <li ng-class="active('contact')"><a href="/contact">Contact</a></li>
         </ul>
       </div><!--/.nav-collapse -->
@@ -99,10 +83,11 @@
       <!-- Panel 2 of sidebar -->
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Second sidebar box</h3>
+          <h3 class="panel-title">Theme</h3>
         </div>
         <div class="panel-body">
-          <p>Wow, yet another one! So amazing</p>
+          <p style="text-align:center;">Current theme: <%= theme %></p>
+          <p style="padding-top: 10px;text-align:center;"><a href="#" class="btn btn-primary btn-sm" ng-click="changeTheme();">Change theme!</a></p>
         </div>
       </div>
       <!-- End panel 2 of sidebar -->

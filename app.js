@@ -38,6 +38,8 @@ function setRoute(file) {
 
 // backend api
 setRoute('post');
+// change settings
+setRoute('settings');
 
 // front end
 // admin

@@ -9,5 +9,5 @@ module.exports = function(app) {
     app.get('/post', post.getPosts);
     app.post('/post', post.createPost);
     app.delete('/post/:postId', post.deletePost);
-}
+};
 

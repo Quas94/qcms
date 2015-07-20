@@ -11,36 +11,26 @@ html {
 }
 
 body {
-    background-image: url('../images/background.jpg');
+    background-image: url('../images/dark.background.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
-.help-block {
-    color: #ff0000;
+.post-link:link, .post-link:hover, .post-link:active, .post-link:visited {
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .p-author-date {
-    color: rgba(0, 0, 0, 0.6);
     font-size: small;
     font-style: italic;
     padding-bottom: 5px;
 }
 
-.panel-default>.panel-heading, .panel-default>.panel-footer {
-    background-color: rgba(255,255,255,0.4);
-}
-
 .panel-footer {
-    color: rgba(0, 0, 0, 0.6);
     font-size: small;
     height: 25px;
     line-height: 24px;
     padding-top: 0px;
-}
-
-.panel {
-    background-color: rgba(255,255,255,0.4);
 }
 
 .panel-main {
@@ -53,10 +43,6 @@ body {
     padding-top: 20px;
 }
 
-.post-link:link, .post-link:hover, .post-link:active, .post-link:visited {
-    color: rgba(0, 0, 0, 0.8);
-}
-
 .no-padding-div {
     padding: 0px 0px 0px 0px;
 }
@@ -67,7 +53,7 @@ body {
 
 #header-jumbotron {
     /*background-image: url('../images/jumbo.jpg');*/
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: rgba(255, 255, 255, 0.15);
     margin-top: 20px;
     margin-bottom: 0px;
 }
@@ -77,7 +63,6 @@ body {
 }
 
 #footer-well {
-    background-color: rgba(255,255,255,0.5);
     padding: 0px;
     padding-top: 10px;
     padding-left: 10px;

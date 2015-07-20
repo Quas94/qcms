@@ -45,8 +45,8 @@ qcms.factory('row', function() {
     return rowService;
 });
 
-qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$interval', '$timeout', '$location', 'row',
-    function($scope, $http, $rootScope, $interval, $timeout, $location, row) {
+qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$interval', '$timeout', '$location', '$window', 'row',
+    function($scope, $http, $rootScope, $interval, $timeout, $location, $window, row) {
         $scope.rowCollapsed = row.isCollapsed;
         // callback for location change events
         $rootScope.$on('$locationChangeStart', function(event, newUrl, oldUrl) {
@@ -85,6 +85,10 @@ qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$interval', '$tim
             if (hours > 12) hours -= 12;
             var display = date.toLocaleDateString() + ', ' + hours + ':' + mins + ' ' + meridian;
             return display;
+        };
+
+        $scope.changeTheme = function() {
+            $window.location.href = '/theme/change';
         };
     }]);
 
