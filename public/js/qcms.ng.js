@@ -47,6 +47,7 @@ qcms.factory('row', function() {
 
 qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$interval', '$timeout', '$location', '$window', 'row',
     function($scope, $http, $rootScope, $interval, $timeout, $location, $window, row) {
+        $scope.navbarCollapsed = true;
         $scope.rowCollapsed = row.isCollapsed;
         // callback for location change events
         $rootScope.$on('$locationChangeStart', function(event, newUrl, oldUrl) {
