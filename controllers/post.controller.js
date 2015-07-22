@@ -82,6 +82,31 @@ exports.createPost = function(req, res) {
 };
 
 /**
+ * Updates an existing blog post. Requires admin logged in.
+ */
+exports.editPost = function(req, res) {
+    if (req.session.loggedIn === true) {
+        // edited posts need to be already html-formatted, so no manipulation required
+        var postId = req.params.postId;
+        var title = req.body.title;
+        var body = req.body.body;
+
+        // update db
+        PostModel.findOneAndUpdate({
+            _id: postId
+        }, {
+            title: title,
+            body: body
+        }, {
+            new: true // make this query return updated post
+        }, function(err, post) {
+            if (err) res.send(err);
+            else res.end();
+        });
+    }
+};
+
+/**
  * Deletes an existing blog post. Needs admin logged in privileges.
  *
  * @param req Express.js request object

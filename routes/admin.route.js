@@ -17,9 +17,10 @@ module.exports = function(app) {
         }
     });
 
+    // TODO: make config file for password
     app.post('/login', function(req, res) {
-        var username = 'quasar';
-        var password = 'password123x';
+        var username = 'USERNAME';
+        var password = 'PASSWORD';
         if (req.body.username != undefined && req.body.username.toLowerCase() === username && req.body.password === password) {
             req.session.loggedIn = true;
             res.send('Success');

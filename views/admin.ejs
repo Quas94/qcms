@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Admin create post</title>
+  <title>qCMS: Admin cPanel</title>
 
   <!-- SCROLLS -->
   <link rel="stylesheet" href="/css/dark.bootstrap.min.css">
@@ -33,18 +33,24 @@
 <div class="container">
   <!-- Header and post count -->
   <div class="jumbotron text-center">
-    <h1>Number of posts: <span class="label label-info">{{ posts.length }}</span></h1>
+    <h1>qCMS: Admin cPanel</h1>
   </div>
 
   <!-- Posts list -->
   <div id="posts-list" class="row">
-    <div class="col-sm-4 col-sm-offset-4">
+    <div class="col-sm-8 col-sm-offset-2">
       <!-- loop over the posts -->
-      <div class="checkbox" ng-repeat="post in posts">
-        <label>
-          <p><input type="checkbox" ng-click="deletePost(post._id)">{{post.title}}</p>
-          <div ng-bind-html="post.body"></div>
-        </label>
+      <div class="panel panel-default" ng-repeat="post in posts">
+        <div class="panel-heading">
+          <input type="text" class="form-control" ng-model="post.title">
+        </div>
+        <div class="panel-body">
+          <p><textarea class="form-control" ng-model="post.body" rows="3"></textarea></p>
+
+          <button class="btn btn-xs btn-default" ng-click="editPost(post._id)">Edit</button>
+          <button class="btn btn-xs btn-default" ng-click="deletePost(post._id, post.title)">Delete</button>
+          <span>Initially written on {{ formatDate(post.date) }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -62,6 +68,9 @@
       </form>
     </div>
   </div>
+
+  <!-- Empty padding at bottom of page -->
+  <div style="padding-bottom: 10%;"></div>
 </div>
 </body>
 </html>
