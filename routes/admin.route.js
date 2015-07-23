@@ -21,7 +21,7 @@ module.exports = function(app) {
     app.post('/login', function(req, res) {
         var username = 'USERNAME';
         var password = 'PASSWORD';
-        if (req.body.username != undefined && req.body.username.toLowerCase() === username && req.body.password === password) {
+        if (req.body.username != undefined && req.body.username.toLowerCase() === username.toLowerCase() && req.body.password === password) {
             req.session.loggedIn = true;
             res.send('Success');
         } else {

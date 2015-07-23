@@ -1,12 +1,10 @@
 /**
  * Controller for the homepage.
  */
+var themeModel = require('../models/theme.model');
+
 module.exports = function(req, res) {
-    // fetch theme from session
-    if (req.session.theme === undefined) {
-        req.session.theme = 'light';
-    }
-    var theme = req.session.theme;
+    var theme = themeModel.getTheme(req);
 
     res.render('main', {
         theme: theme

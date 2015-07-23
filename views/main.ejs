@@ -74,29 +74,7 @@
   <!-- Main body -->
   <div class="row" collapse="rowCollapsed" id="main-content">
     <!-- Sidebar -->
-    <div class="col-md-3">
-      <!-- Panel 1 of sidebar -->
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Sidebar</h3>
-        </div>
-        <div class="panel-body">
-          <p>This is the sidebar, to be filled with wonderful navigational tools.</p>
-        </div>
-      </div>
-      <!-- End panel 1 of sidebar -->
-      <!-- Panel 2 of sidebar -->
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Theme</h3>
-        </div>
-        <div class="panel-body">
-          <p style="text-align:center;">Current theme: <%= theme %></p>
-          <p style="padding-top: 10px;text-align:center;"><a href="#" class="btn btn-default btn-sm" ng-click="changeTheme();">Change theme!</a></p>
-        </div>
-      </div>
-      <!-- End panel 2 of sidebar -->
-    </div>
+    <div class="col-md-3" ng-include="'/view/sidebar'"></div>
 
     <!-- Start main content column -->
     <div ng-view></div>

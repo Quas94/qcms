@@ -48,6 +48,7 @@ setRoute('admin'); // includes admin and login
 setRoute('main'); // includes home, about, ...
 setRoute('view'); // views
 setRoute('index');
+setRoute('notfound'); // 404
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

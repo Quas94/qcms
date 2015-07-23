@@ -30,8 +30,12 @@ qcms.config(['$routeProvider', '$locationProvider',
                 templateUrl: '/view/contact',
                 controller: 'generalCtrl'
             }).
+            when('/not-found', {
+                templateUrl: '/view/not-found',
+                controller: 'generalCtrl'
+            }).
             otherwise({
-                // redirectTo: '/404'
+                redirectTo: '/not-found'
             });
 
         $locationProvider.html5Mode(true);
