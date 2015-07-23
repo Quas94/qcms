@@ -7,6 +7,7 @@ module.exports = function(app) {
     app.get('/post/:postId', post.getSinglePost);
     app.post('/post/:postId', post.editPost);
     app.post('/post/:postId/comment', post.createComment);
+    app.delete('/post/:postId/comment/:commentId', post.deleteComment);
     app.get('/post', post.getPosts);
     app.post('/post', post.createPost);
     app.delete('/post/:postId', post.deletePost);

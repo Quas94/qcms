@@ -40,7 +40,7 @@
 </head>
 <body role="document" ng-controller="mainCtrl">
 <!-- Container for entire page -->
-<div class="container" role="main">
+<div class="container" id="header" role="main">
   <!-- Header  -->
   <div class="jumbotron" id="header-jumbotron">
     <div class="container">
@@ -66,13 +66,19 @@
           <li ng-class="active('about')"><a href="/about">About Me</a></li>
           <li ng-class="active('contact')"><a href="/contact">Contact</a></li>
         </ul>
-      </div><!--/.nav-collapse -->
+        <ul class="nav navbar-nav navbar-right">
+          <!-- padding-right is to make up for element overflow on right hand side -->
+          <li style="padding-right: 15px;"><a href="#" ng-click="changeTheme();">Change Theme!</a></li>
+        </ul>
+      </div><!--/.navbar-collapse -->
     </div>
   </nav>
   <!-- End header -->
+</div>
+<div class="container" id="main-content">
 
   <!-- Main body -->
-  <div class="row" collapse="rowCollapsed" id="main-content">
+  <div class="row" collapse="rowCollapsed">
     <!-- Sidebar -->
     <div class="col-md-3" ng-include="'/view/sidebar'"></div>
 

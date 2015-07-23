@@ -1,5 +1,7 @@
 var create = angular.module('create', [
-        'ngSanitize'
+        'ngAnimate',
+        'ngSanitize',
+        'ui.bootstrap'
     ]);
 
 create.controller('createCtrl', ['$scope', '$http', '$window',
@@ -13,6 +15,10 @@ create.controller('createCtrl', ['$scope', '$http', '$window',
             .success(function(data) {
                 // show posts
                 $scope.posts = data;
+                // set all comments to be collapsed to begin with
+                for (var i = 0; i < $scope.posts.length; i++) {
+                    $scope.posts[i].collapsed = true;
+                }
             })
             .error(function(data) {
                 console.log('Error: ' + data);
@@ -58,6 +64,7 @@ create.controller('createCtrl', ['$scope', '$http', '$window',
                 for (var i = 0; i < $scope.posts.length; i++) {
                     if ($scope.posts[i]._id === id) {
                         index = i;
+                        break;
                     }
                 }
                 $http.post('/post/' + id, $scope.posts[index])
@@ -68,7 +75,7 @@ create.controller('createCtrl', ['$scope', '$http', '$window',
                         console.log('Error occurred editing post: ' + err);
                     });
             }
-        }
+        };
 
         // delete post
         $scope.deletePost = function(id, title) {
@@ -81,6 +88,28 @@ create.controller('createCtrl', ['$scope', '$http', '$window',
                     })
                     .error(function(err) {
                         console.log('Error occurred deleting post: ' + err);
+                    });
+            }
+        };
+
+        // delete comment
+        $scope.deleteComment = function(postId, commentId, author) {
+            var confirm = $window.confirm("Deleting comment written by '" + author + "', confirm?");
+            // fetch post index in $scope.posts array
+            var postIndex = -1;
+            for (var i = 0; i < $scope.posts.length; i++) {
+                if ($scope.posts[i]._id === postId) {
+                    postIndex = i;
+                    break;
+                }
+            }
+            if (confirm) {
+                $http.delete('/post/' + postId + '/comment/' + commentId)
+                    .success(function(data) {
+                        $scope.posts[i] = data;
+                    })
+                    .error(function(err) {
+                        console.log('Error encountered deleting comment: ' + err);
                     });
             }
         };

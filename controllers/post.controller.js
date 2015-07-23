@@ -59,13 +59,10 @@ exports.createComment = function(req, res) {
             res.json(post);
         });
     }
-}
+};
 
 /**
  * Creates a new blog post. Needs admin logged in privileges.
- *
- * @param req Express.js request object
- * @param res Express.js response object
  */
 exports.createPost = function(req, res) {
     if (req.session.loggedIn === true) {
@@ -108,9 +105,6 @@ exports.editPost = function(req, res) {
 
 /**
  * Deletes an existing blog post. Needs admin logged in privileges.
- *
- * @param req Express.js request object
- * @param res Express.js response object
  */
 exports.deletePost = function(req, res) {
     if (req.session.loggedIn === true) {
@@ -121,7 +115,34 @@ exports.deletePost = function(req, res) {
             getPostsInternal(req, res);
         });
     }
-}
+};
+
+/**
+ * Deletes a comment from a blog post.
+ */
+exports.deleteComment = function(req, res) {
+    if (req.session.loggedIn === true) {
+        var postId = req.params.postId;
+        var commentId = req.params.commentId;
+        try {
+            PostModel.findOneAndUpdate({
+                _id: postId
+            }, {
+                $pull: {
+                    comments: {_id: commentId}
+                }
+            }, {
+                new: true
+            }, function (err, post) {
+                if (err) res.send(err);
+
+                res.send(post);
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+};
 
 /**
  * Splits a body of text into paragraphs (adding p tag html markup) by splitting over double newline characters.

@@ -16,8 +16,8 @@ body {
     background-attachment: fixed;
 }
 
-.post-link:link, .post-link:hover, .post-link:active, .post-link:visited {
-    color: rgba(255, 255, 255, 0.4);
+.help-block {
+    color: #ff0000;
 }
 
 .p-author-date {
@@ -38,6 +38,14 @@ body {
     padding-top: 0px;
 }
 
+.panel-default>.panel-heading, .panel-default>.panel-footer {
+    /** Nothing in dark version */
+}
+
+.panel {
+    /** Nothing in dark version */
+}
+
 .panel-main {
     text-align: justify;
 }
@@ -46,6 +54,10 @@ body {
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 20px;
+}
+
+.post-link:link, .post-link:hover, .post-link:active, .post-link:visited {
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .no-padding-div {

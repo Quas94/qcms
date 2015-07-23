@@ -7,8 +7,34 @@
 
   <title>qCMS: Admin cPanel</title>
 
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- jQuery -->
+  <!--
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  -->
+
+  <!-- Angular.js minified library CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-animate.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-route.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-sanitize.js"></script>
+
+  <!-- Bootstrap -->
+  <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">-->
+  <!-- Skinned bootstrap -->
+  <link href="/css/dark.bootstrap.min.css" rel="stylesheet">
+
+  <!-- Angular.js stuff -->
+  <script src="/js/ui-bootstrap.min.js"></script>
+  <script src="/js/create.ng.js"></script>
+
   <!-- SCROLLS -->
-  <link rel="stylesheet" href="/css/dark.bootstrap.min.css">
   <style>
     html {
       overflow-y: scroll;
@@ -20,14 +46,6 @@
       margin-bottom: 30px;
     }
   </style>
-
-  <!-- JS -->
-  <!-- Angular.js minified library CDN -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-animate.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-route.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-sanitize.js"></script>
-  <script src="/js/create.ng.js"></script>
 </head>
 <body ng-controller="createCtrl">
 <div class="container">
@@ -50,6 +68,15 @@
           <button class="btn btn-xs btn-default" ng-click="editPost(post._id)">Edit</button>
           <button class="btn btn-xs btn-default" ng-click="deletePost(post._id, post.title)">Delete</button>
           <span>Initially written on {{ formatDate(post.date) }}</span>
+        </div>
+        <div class="panel-heading"><button class="btn btn-xs btn-default" ng-click="post.collapsed = !post.collapsed;">{{ post.collapsed ? '+' : '-' }}</button> Comments</div>
+        <div class="panel-body" collapse="post.collapsed">
+          <div ng-repeat="comment in post.comments track by $index">
+            <p>Author: {{ comment.author }}</p>
+            <p>{{ comment.body }}</p>
+            <button class="btn btn-xs btn-default" ng-click="deleteComment(post._id, comment._id, comment.author)">Delete Comment</button>
+            <hr />
+          </div>
         </div>
       </div>
     </div>
