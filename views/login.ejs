@@ -7,11 +7,23 @@
 
   <title>Admin login</title>
 
+  <link href="/css/dark.bootstrap.min.css" rel="stylesheet">
+  <style>
+    .container {
+      padding-top: 20%;
+    }
+
+    h2 {
+      padding-bottom: 10%;
+    }
+  </style>
+
   <!-- JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-animate.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-route.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-sanitize.js"></script>
+  <script src="/js/ui-bootstrap.min.js"></script>
   <script src="/js/create.ng.js"></script>
 </head>
 <body ng-controller="createCtrl">
@@ -22,6 +34,7 @@
     <div class="col-sm-8 col-sm-offset-2 text-center">
       <form>
         <div class="form-group">
+          <h2>qCMS Admin cPanel</h2>
           <input type="text" class="form-control input-lg text-center" placeholder="username" ng-model="formData.username">
           <input type="password" class="form-control input-lg text-center" placeholder="password" ng-model="formData.password">
         </div>
