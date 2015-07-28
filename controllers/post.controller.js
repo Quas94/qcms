@@ -66,15 +66,22 @@ exports.createComment = function(req, res) {
  */
 exports.createPost = function(req, res) {
     if (req.session.loggedIn === true) {
+        // split tags by commas and trim all
+        var tags = req.body.tags.split(',');
+        for (var i = 0; i < tags.length; i++) {
+            tags[i] = tags[i].trim();
+        }
         PostModel.create({
             title: req.body.title,
             body: splitIntoParagraphs(req.body.body),
             author: req.body.author,
-            date: Date.now()
+            date: Date.now(),
+            category: req.body.category,
+            tags: tags
         }, function (err, posts) {
             if (err) res.send(err);
             getPostsInternal(req, res);
-        })
+        });
     }
 };
 

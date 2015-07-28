@@ -1,87 +1,17 @@
-/* Custom CSS on top of bootstrap */
-
-/* This is for Angular's version of bootstrap js */
-.nav, .pagination, .carousel, .panel-title a {
-    cursor: pointer;
-}
-
-/* This is so that the scrollbar will always be present regardless of page height */
-html {
-    overflow-y: scroll;
-}
+/** Custom CSS for the dark theme only. Overrides common */
 
 body {
     background-image: url('../images/dark.background.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
-.help-block {
-    color: #ff0000;
 }
 
 .p-author-date {
     color: rgba(255, 255, 255, 0.2);
-    font-size: small;
-    font-style: italic;
-    padding-bottom: 5px;
 }
 
 .panel-title {
     color: rgba(255, 255, 255, 0.75);
 }
 
-.panel-footer {
-    font-size: small;
-    height: 25px;
-    line-height: 24px;
-    padding-top: 0px;
-}
-
-.panel-default>.panel-heading, .panel-default>.panel-footer {
-    /** Nothing in dark version */
-}
-
-.panel {
-    /** Nothing in dark version */
-}
-
-.panel-main {
-    text-align: justify;
-}
-
-.panel-body {
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 20px;
-}
-
 .post-link:link, .post-link:hover, .post-link:active, .post-link:visited {
     color: rgba(255, 255, 255, 0.4);
-}
-
-.no-padding-div {
-    padding: 0px 0px 0px 0px;
-}
-
-.empty-padding {
-    padding-bottom: 10%;
-}
-
-#header-jumbotron {
-    /*background-image: url('../images/jumbo.jpg');*/
-    background-color: rgba(255, 255, 255, 0.15);
-    margin-top: 20px;
-    margin-bottom: 0px;
-}
-
-#header-navbar {
-    margin-top: 0px;
-}
-
-#footer-well {
-    padding: 0px;
-    padding-top: 10px;
-    padding-left: 10px;
-    text-align: center;
 }

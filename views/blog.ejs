@@ -6,7 +6,7 @@
         <a class="post-link" href="/blog/{{post._id}}"><h3 class="panel-title post-link">{{post.title}}</h3></a>
       </div>
       <div class="panel-body">
-        <p class="p-author-date">posted by {{post.author}} on {{formatDate(post.date)}}</p>
+        <p class="p-author-date">posted by <em>{{post.author}}</em> on {{formatDate(post.date)}}</p>
         <div ng-bind-html="post.body"></div>
       </div>
       <div class="panel-footer">

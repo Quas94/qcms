@@ -1,42 +1,19 @@
-/* Custom CSS on top of bootstrap */
-
-/* This is for Angular's version of bootstrap js */
-.nav, .pagination, .carousel, .panel-title a {
-    cursor: pointer;
-}
-
-/* This is so that the scrollbar will always be present regardless of page height */
-html {
-    overflow-y: scroll;
-}
+/** Custom CSS for the light theme only. Overrides common */
 
 body {
     background-image: url('../images/light.background.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
-.help-block {
-    color: #ff0000;
 }
 
 .p-author-date {
     color: rgba(0, 0, 0, 0.6);
-    font-size: small;
-    font-style: italic;
-    padding-bottom: 5px;
-}
-
-.panel-title {
-    /** Nothing in light version */
 }
 
 .panel-footer {
     color: rgba(0, 0, 0, 0.6);
-    font-size: small;
-    height: 25px;
-    line-height: 24px;
-    padding-top: 0px;
+}
+
+.post-link:link, .post-link:hover, .post-link:active, .post-link:visited {
+    color: rgba(0, 0, 0, 0.8);
 }
 
 .panel-default>.panel-heading, .panel-default>.panel-footer {
@@ -47,43 +24,6 @@ body {
     background-color: rgba(255,255,255,0.4);
 }
 
-.panel-main {
-    text-align: justify;
-}
-
-.panel-body {
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 20px;
-}
-
-.post-link:link, .post-link:hover, .post-link:active, .post-link:visited {
-    color: rgba(0, 0, 0, 0.8);
-}
-
-.no-padding-div {
-    padding: 0px 0px 0px 0px;
-}
-
-.empty-padding {
-    padding-bottom: 10%;
-}
-
-#header-jumbotron {
-    /*background-image: url('../images/jumbo.jpg');*/
-    background-color: rgba(255, 255, 255, 0.25);
-    margin-top: 20px;
-    margin-bottom: 0px;
-}
-
-#header-navbar {
-    margin-top: 0px;
-}
-
 #footer-well {
     background-color: rgba(255,255,255,0.5);
-    padding: 0px;
-    padding-top: 10px;
-    padding-left: 10px;
-    text-align: center;
 }

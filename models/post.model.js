@@ -9,6 +9,8 @@ var PostModel = mongoose.model('BlogPost', {
         upvotes: Number,
         downvotes: Number
     },
+    category: String,
+    tags: [String], // array of tags
     comments: [{
         author: String,
         body: String,
