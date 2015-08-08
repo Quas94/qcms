@@ -7,7 +7,9 @@
       </div>
       <div class="panel-body">
         <p class="p-author-date">posted by <em>{{post.author}}</em> on {{formatDate(post.date)}}</p>
-        <div ng-bind-html="post.body"></div>
+        <div ng-bind-html="post.body" style="padding-bottom:8px;"></div>
+        <p class="p-author-date" style="padding-bottom:0px;margin-bottom:0px;border-bottom:0px;">category: <em>{{post.category}}</em></p>
+        <p class="p-author-date">tags: <span ng-repeat="tag in post.tags">{{tag}}</span></p>
       </div>
       <div class="panel-footer">
         <a class="post-link" href="/blog/{{post._id}}">{{post.comments.length}} comment{{getTrailingS(post);}}</a>

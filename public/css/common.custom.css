@@ -15,6 +15,10 @@ body {
     background-attachment: fixed;
 }
 
+em {
+    font-size: larger;
+}
+
 .help-block {
     color: #ff0000;
 }

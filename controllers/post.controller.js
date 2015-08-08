@@ -94,13 +94,21 @@ exports.editPost = function(req, res) {
         var postId = req.params.postId;
         var title = req.body.title;
         var body = req.body.body;
+        var category = req.body.category;
+        // split tags by commas and trim all
+        var tags = req.body.tags.split(',');
+        for (var i = 0; i < tags.length; i++) {
+            tags[i] = tags[i].trim();
+        }
 
         // update db
         PostModel.findOneAndUpdate({
             _id: postId
         }, {
             title: title,
-            body: body
+            body: body,
+            category: category,
+            tags: tags
         }, {
             new: true // make this query return updated post
         }, function(err, post) {

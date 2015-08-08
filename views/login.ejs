@@ -10,11 +10,11 @@
   <link href="/css/dark.bootstrap.min.css" rel="stylesheet">
   <style>
     .container {
-      padding-top: 20%;
+      padding-top: 10%;
     }
 
     h2 {
-      padding-bottom: 10%;
+      padding-bottom: 5%;
     }
   </style>
 
@@ -37,9 +37,9 @@
           <h2>qCMS Admin cPanel</h2>
           <input type="text" class="form-control input-lg text-center" placeholder="username" ng-model="formData.username">
           <input type="password" class="form-control input-lg text-center" placeholder="password" ng-model="formData.password">
+          <p style="padding-top: 10px; color:red;">{{ message }}</p>
         </div>
         <button type="submit" class="btn btn-primary btn-lg" ng-click="login()">Login</button>
-        <p style="color:red;">{{ message }}</p>
       </form>
     </div>
   </div>

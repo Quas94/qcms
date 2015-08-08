@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>qCMS: Admin cPanel</title>
+  <title>qCMS Admin cPanel</title>
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -51,7 +51,7 @@
 <div class="container">
   <!-- Header and post count -->
   <div class="jumbotron text-center">
-    <h1>qCMS: Admin cPanel</h1>
+    <h1>qCMS Admin cPanel</h1>
   </div>
 
   <!-- Posts list -->
@@ -63,9 +63,12 @@
           <input type="text" class="form-control" ng-model="post.title">
         </div>
         <div class="panel-body">
-          <p><textarea class="form-control" ng-model="post.body" rows="3"></textarea></p>
-
-          <button class="btn btn-xs btn-default" ng-click="editPost(post._id)">Edit</button>
+          <p>
+            <textarea class="form-control" ng-model="post.body" rows="6"></textarea>
+            Category: <input type="text" class="form-control" ng-model="post.category">
+            Tags: <input type="text" class="form-control" ng-model="post.tags">
+          </p>
+          <button class="btn btn-xs btn-default" ng-click="editPost(post._id)">Update</button>
           <button class="btn btn-xs btn-default" ng-click="deletePost(post._id, post.title)">Delete</button>
           <span>Initially written on {{ formatDate(post.date) }}</span>
         </div>

@@ -102,10 +102,19 @@ qcms.controller('generalCtrl', ['row',
         row.isCollapsed = false;
     }]);
 
+var processTags = function(tags) {
+    for (var i = 0; i < tags.length - 1; i++) {
+        tags[i] += ', ';
+    }
+    return tags;
+};
+
 qcms.controller('blogCtrl', ['$scope', '$http', 'row',
 
     function($scope, $http, row) {
         $scope.formData = {};
+
+        $scope.processTags = processTags;
 
         // upon landing on the page, get all posts and show
         $http.get('/post')
@@ -117,6 +126,10 @@ qcms.controller('blogCtrl', ['$scope', '$http', 'row',
 
                 // show posts
                 $scope.posts = data;
+                // fix tags commas
+                for (var i = 0; i < $scope.posts.length; i++) {
+                    $scope.posts[i].tags = processTags($scope.posts[i].tags);
+                }
                 // set row service collapsed to false
                 row.isCollapsed = false;
             })
@@ -177,6 +190,8 @@ qcms.controller('blogPostCtrl', ['$scope', '$http', '$location', 'row',
                     console.log('Error: tried to load a single post, but json array length was ' + data.length);
                 }
                 $scope.post = data[0];
+                // fix tags formatting
+                $scope.post.tags = processTags($scope.post.tags);
 
                 // set row service collapsed to false
                 row.isCollapsed = false;

@@ -7,8 +7,10 @@
         <h3 class="panel-title">{{post.title}}</h3>
       </div>
       <div class="panel-body">
-        <p class="p-author-date">posted by {{post.author}} on {{formatDate(post.date)}}</p>
+        <p class="p-author-date">posted by <em>{{post.author}}</em> on {{formatDate(post.date)}}</p>
         <div ng-bind-html="post.body"></div>
+        <p class="p-author-date" style="padding-bottom:0px;margin-bottom:0px;border-bottom:0px;">category: <em>{{post.category}}</em></p>
+        <p class="p-author-date">tags: <span ng-repeat="tag in post.tags">{{tag}}</span></p>
       </div>
     </div>
 
