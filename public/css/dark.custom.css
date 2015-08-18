@@ -4,6 +4,10 @@ body {
     background-image: url('../images/dark.background.jpg');
 }
 
+.sidebar {
+    /*color: rgba(255, 255, 255, 0.4);*/
+}
+
 .p-author-date {
     color: rgba(255, 255, 255, 0.2);
 }

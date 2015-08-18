@@ -46,9 +46,9 @@
   <!-- Main body -->
   <div class="row">
     <!-- Sidebar -->
-    <div class="col-md-2 sidebar" ng-include="'/view/sidebar'"></div>
+    <div class="col-md-3 col-lg-2 sidebar" ng-include="'/view/sidebar'"></div>
     <!-- End sidebar, start header + main page -->
-    <div class="col-md-10 pull-right" id="non-sidebar" role="main">
+    <div class="col-md-9 col-lg-10 pull-right" id="non-sidebar" role="main">
       <!-- Header  -->
       <div class="jumbotron" id="header-jumbotron">
         <div class="container-fluid">
@@ -56,6 +56,7 @@
           <p>a rookie content management platform written in an attempt to learn the JavaScript MEAN.io full-stack (MongoDB, Express, Angular and Node) as well as Bootstrap and a bit of jQuery.</p>
         </div>
       </div>
+      <!--
       <nav class="navbar navbar-inverse" role="navigation" id="header-navbar">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -75,12 +76,12 @@
               <li ng-class="active('contact')"><a href="/contact">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <!-- padding-right is to make up for element overflow on right hand side -->
               <li style="padding-right: 15px;"><a href="#" ng-click="changeTheme();">Change Theme!</a></li>
             </ul>
-          </div><!--/.navbar-collapse -->
+          </div>
         </div>
       </nav>
+      -->
       <!-- End header -->
       <!-- Start main content column -->
       <div class="no-padding-div" id="page-inner" collapse="rowCollapsed">

@@ -15,7 +15,6 @@
     padding: 20px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #545454;
     border-right: 1px solid #eee;
 }
 
@@ -49,6 +48,14 @@ em {
     font-size: larger;
 }
 
+hr {
+    margin-top: 10px;
+}
+
+.post-body {
+    padding-bottom: 15px;
+}
+
 .help-block {
     color: #ff0000;
 }
@@ -57,6 +64,12 @@ em {
     font-size: small;
     font-style: italic;
     padding-bottom: 5px;
+}
+
+.p-category {
+    padding-bottom:0px;
+    margin-bottom:0px;
+    border-bottom:0px;
 }
 
 .panel-footer {
@@ -73,7 +86,13 @@ em {
 .panel-body {
     padding-left: 30px;
     padding-right: 30px;
-    padding-top: 20px;
+    padding-top: 0px;
+}
+
+.panelh {
+    font-size: 1.8em;
+    padding:10px 0px 10px 15px;
+    margin-bottom:0px;
 }
 
 .no-padding-div {
@@ -85,10 +104,10 @@ em {
 }
 
 #header-jumbotron {
-    /*background-image: url('../images/jumbo.jpg');*/
-    background-color: rgba(255, 255, 255, 0.25);
+    background-image: url('../images/jumbo.jpg');
+    color: #ffffff;
     margin-top: 20px;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
 }
 
 #header-navbar {

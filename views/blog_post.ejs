@@ -1,30 +1,30 @@
 <!-- Front page -->
 <!-- Actual blog post -->
 <div class="panel panel-default panel-main">
-  <div class="panel-heading">
-    <h3 class="panel-title">{{post.title}}</h3>
-  </div>
+  <h5 class="panelh">{{post.title}}</h5>
   <div class="panel-body">
-    <p class="p-author-date">posted by <em>{{post.author}}</em> on {{formatDate(post.date)}}</p>
-    <div ng-bind-html="post.body"></div>
-    <p class="p-author-date" style="padding-bottom:0px;margin-bottom:0px;border-bottom:0px;">category: <em>{{post.category}}</em></p>
+    <p class="p-author-date">posted by {{post.author}} on {{formatDate(post.date)}}</p>
+    <hr />
+    <div ng-bind-html="post.body" class="post-body"></div>
+    <hr />
+    <p class="p-author-date p-category">category: {{post.category}}</p>
     <p class="p-author-date">tags: <span ng-repeat="tag in post.tags">{{tag}}</span></p>
   </div>
 </div>
 
 <!-- Comments display -->
 <div class="panel panel-default panel-main" id="comments">
-  <h5 style="padding:10px 0px 10px 15px;margin-bottom:0px;">Comments</h5>
-  <div class="panel-body" style="padding-top:0px;">
+  <h5 class="panelh">Comments</h5>
+  <div class="panel-body">
     <div ng-repeat="comment in post.comments">
-      <hr style="margin-top:10px;" />
+      <hr />
       <p class="p-author-date">posted by {{comment.author}} on {{formatDate(comment.date)}}</p>
       <div ng-bind-html="comment.body"></div>
       <!-- empty paragraph for padding -->
       <p style="padding-bottom:5px;"></p>
     </div>
     <div ng-if="post.comments.length === 0">
-      <hr style="margin-top:10px;" />
+      <hr />
       <p>No comments yet!</p>
     </div>
   </div>
