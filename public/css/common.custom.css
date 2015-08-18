@@ -35,6 +35,8 @@ em {
 }
 
 .blog-post-body img {
+    padding-top: 15px;
+    padding-bottom: 15px;
     max-width: 100%;
     max-height: 100%;
 }
