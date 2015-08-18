@@ -16,7 +16,7 @@ exports.getPosts = getPostsInternal;
 
 var getSinglePostInternal = function(req, res) {
     PostModel.find({
-        _id: req.params.postId
+        path: req.params.postId
     }, function(err, post) {
         if (err) res.send(err);
 
@@ -71,8 +71,15 @@ exports.createPost = function(req, res) {
         for (var i = 0; i < tags.length; i++) {
             tags[i] = tags[i].trim();
         }
+        // process url path from title
+        var path = req.body.title.toLowerCase();
+        path = path.replace(new RegExp(' ', 'g'), '-'); // replace spaces with dash
+        path = path.replace(new RegExp('[^a-zA-Z0-9\-]', 'g'), ''); // get rid of all non-alphanumeric/space chars
+        // TODO: account for possible duplicate post titles/paths
+        // actually insert into database
         PostModel.create({
             title: req.body.title,
+            path: path,
             body: splitIntoParagraphs(req.body.body),
             author: req.body.author,
             date: Date.now(),
@@ -93,6 +100,7 @@ exports.editPost = function(req, res) {
         // edited posts need to be already html-formatted, so no manipulation required
         var postId = req.params.postId;
         var title = req.body.title;
+        var path = req.body.path;
         var body = req.body.body;
         var category = req.body.category;
         // split tags by commas and trim all
@@ -106,6 +114,7 @@ exports.editPost = function(req, res) {
             _id: postId
         }, {
             title: title,
+            path: path,
             body: body,
             category: category,
             tags: tags

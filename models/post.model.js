@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var PostModel = mongoose.model('BlogPost', {
     title: String,
+    path: { type: String, index: true }, // readable url
     body: String,
     author: String,
     date: Date,
