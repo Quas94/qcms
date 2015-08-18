@@ -8,10 +8,6 @@ var qcms = angular.module('qcms', [
 qcms.config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
         $routeProvider.
-            when('/home', {
-                templateUrl: '/view/home',
-                controller: 'generalCtrl'
-            }).
             when('/blog/:id', {
                 templateUrl: function(urlAttr) {
                     return '/view/blog/' + urlAttr.id;

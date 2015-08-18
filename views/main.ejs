@@ -42,62 +42,69 @@
 </head>
 <body role="document" ng-controller="mainCtrl">
 <!-- Container for entire page -->
-<div class="container-fluid" id="main-container">
-  <!-- Main body -->
-  <div class="row">
-    <!-- Sidebar -->
-    <div class="col-md-2 sidebar" ng-include="'/view/sidebar'"></div>
-    <!-- End sidebar, start header + main page -->
-    <div class="col-md-10 pull-right" id="non-sidebar" role="main">
-      <!-- Header  -->
-      <div class="jumbotron" id="header-jumbotron">
-        <div class="container-fluid">
-          <h1>Welcome to qCMS</h1>
-          <p>a rookie content management platform written in an attempt to learn the JavaScript MEAN.io full-stack (MongoDB, Express, Angular and Node) as well as Bootstrap and a bit of jQuery.</p>
-        </div>
-      </div>
-      <nav class="navbar navbar-inverse" role="navigation" id="header-navbar">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/home">qCMS</a>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse" collapse="navbarCollapsed">
-            <ul class="nav navbar-nav">
-              <li ng-class="active('home')"><a href="/home">Home</a></li>
-              <li ng-class="active('blog')"><a href="/blog">Blog</a></li>
-              <li ng-class="active('about')"><a href="/about">About Me</a></li>
-              <li ng-class="active('contact')"><a href="/contact">Contact</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <!-- padding-right is to make up for element overflow on right hand side -->
-              <li style="padding-right: 15px;"><a href="#" ng-click="changeTheme();">Change Theme!</a></li>
-            </ul>
-          </div><!--/.navbar-collapse -->
-        </div>
-      </nav>
-      <!-- End header -->
-      <!-- Start main content column -->
-      <div class="no-padding-div" id="page-inner" collapse="rowCollapsed">
-          <div ng-view></div>
-      </div>
-      <!-- End main content column -->
-      <!-- Footer -->
-      <footer>
-        <div class="well" id="footer-well">
-          <p>qCMS &copy; Quasar 2015</p>
-        </div>
-      </footer>
-      <!-- End footer -->
+<div class="container" id="header" role="main">
+  <!-- Header  -->
+  <div class="jumbotron" id="header-jumbotron">
+    <div class="container">
+      <h1>Welcome to qCMS</h1>
+      <p>a rookie content management platform written in an attempt to learn the JavaScript MEAN.io full-stack (MongoDB, Express, Angular and Node) as well as Bootstrap and a bit of jQuery.</p>
     </div>
   </div>
+  <nav class="navbar navbar-inverse" role="navigation" id="header-navbar">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/home">qCMS</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse" collapse="navbarCollapsed">
+        <ul class="nav navbar-nav">
+          <li ng-class="active('blog')"><a href="/blog">Blog</a></li>
+          <li ng-class="active('about')"><a href="/about">About Me</a></li>
+          <li ng-class="active('contact')"><a href="/contact">Contact</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <!-- padding-right is to make up for element overflow on right hand side -->
+          <li style="padding-right: 15px;"><a href="#" ng-click="changeTheme();">Change Theme!</a></li>
+        </ul>
+      </div><!--/.navbar-collapse -->
+    </div>
+  </nav>
+  <!-- End header -->
+</div>
+<div class="container" id="main-content">
+
+  <!-- Main body -->
+  <div class="row" collapse="rowCollapsed">
+    <!-- Sidebar -->
+    <div class="col-md-3" ng-include="'/view/sidebar'"></div>
+
+    <!-- Start main content column -->
+    <div class="no-padding-div" id="page-inner">
+      <div class="col-md-9 pull-right">
+        <div ng-view></div>
+      </div>
+    </div>
+    <!-- End main content column -->
+
+  </div>
+
 </div>
 <!-- End main body -->
+
+<!-- Footer -->
+<div class="container">
+  <footer>
+    <div class="well" id="footer-well">
+      <p>qCMS &copy; Quasar 2015</p>
+    </div>
+  </footer>
+</div>
+<!-- End footer -->
 <!-- End container for page -->
 </body>
 </html>

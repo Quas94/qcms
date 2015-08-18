@@ -3,10 +3,6 @@
  */
 var themeModel = require('../models/theme.model');
 
-exports.home = function(req, res) {
-    res.render('home');
-};
-
 exports.sidebar = function(req, res) {
     var theme = themeModel.getTheme(req);
     res.render('sidebar', {
