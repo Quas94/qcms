@@ -1,57 +1,53 @@
 <!-- Front page -->
-<div class="no-padding-div" id="page-blog-post">
-  <div class="col-md-9 pull-right">
-    <!-- Actual blog post -->
-    <div class="panel panel-default panel-main">
-      <div class="panel-heading">
-        <h3 class="panel-title">{{post.title}}</h3>
-      </div>
-      <div class="panel-body">
-        <p class="p-author-date">posted by <em>{{post.author}}</em> on {{formatDate(post.date)}}</p>
-        <div ng-bind-html="post.body"></div>
-        <p class="p-author-date" style="padding-bottom:0px;margin-bottom:0px;border-bottom:0px;">category: <em>{{post.category}}</em></p>
-        <p class="p-author-date">tags: <span ng-repeat="tag in post.tags">{{tag}}</span></p>
-      </div>
+<!-- Actual blog post -->
+<div class="panel panel-default panel-main">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{post.title}}</h3>
+  </div>
+  <div class="panel-body">
+    <p class="p-author-date">posted by <em>{{post.author}}</em> on {{formatDate(post.date)}}</p>
+    <div ng-bind-html="post.body"></div>
+    <p class="p-author-date" style="padding-bottom:0px;margin-bottom:0px;border-bottom:0px;">category: <em>{{post.category}}</em></p>
+    <p class="p-author-date">tags: <span ng-repeat="tag in post.tags">{{tag}}</span></p>
+  </div>
+</div>
+
+<!-- Comments display -->
+<div class="panel panel-default panel-main" id="comments">
+  <h5 style="padding:10px 0px 10px 15px;margin-bottom:0px;">Comments</h5>
+  <div class="panel-body" style="padding-top:0px;">
+    <div ng-repeat="comment in post.comments">
+      <hr style="margin-top:10px;" />
+      <p class="p-author-date">posted by {{comment.author}} on {{formatDate(comment.date)}}</p>
+      <div ng-bind-html="comment.body"></div>
+      <!-- empty paragraph for padding -->
+      <p style="padding-bottom:5px;"></p>
     </div>
-
-    <!-- Comments display -->
-    <div class="panel panel-default panel-main" id="comments">
-      <h5 style="padding:10px 0px 10px 15px;margin-bottom:0px;">Comments</h5>
-      <div class="panel-body" style="padding-top:0px;">
-        <div ng-repeat="comment in post.comments">
-          <hr style="margin-top:10px;" />
-          <p class="p-author-date">posted by {{comment.author}} on {{formatDate(comment.date)}}</p>
-          <div ng-bind-html="comment.body"></div>
-          <!-- empty paragraph for padding -->
-          <p style="padding-bottom:5px;"></p>
-        </div>
-        <div ng-if="post.comments.length === 0">
-          <hr style="margin-top:10px;" />
-          <p>No comments yet!</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Comment post form -->
-    <div class="panel panel-default panel-main col-sm-6 no-padding-div">
-      <div class="panel-body no-padding-div">
-        <h5 style="padding:10px 10px 10px 15px;">Leave a comment</h5>
-        <form>
-          <div class="form-group col-sm-12" id="comment-form">
-            <input type="text" class="form-control input-xs" placeholder="your name" ng-model="commentData.author">
-            <textarea class="form-control" ng-model="commentData.body" rows="3" placeholder="what are your thoughts?"></textarea>
-            <span class="help-block">{{ commentMessage }}</span>
-          </div>
-          <div class="form-group col-sm-12">
-            <button type="submit" class="btn btn-primary btn-xs form-control" ng-disabled="postCommentClicked" ng-click="postComment()">Post Comment</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <div class="empty-padding"></div>
-
+    <div ng-if="post.comments.length === 0">
+      <hr style="margin-top:10px;" />
+      <p>No comments yet!</p>
     </div>
   </div>
+</div>
+
+<!-- Comment post form -->
+<div class="panel panel-default panel-main col-sm-6 no-padding-div">
+  <div class="panel-body no-padding-div">
+    <h5 style="padding:10px 10px 10px 15px;">Leave a comment</h5>
+    <form>
+      <div class="form-group col-sm-12" id="comment-form">
+        <input type="text" class="form-control input-xs" placeholder="your name" ng-model="commentData.author">
+        <textarea class="form-control" ng-model="commentData.body" rows="3" placeholder="what are your thoughts?"></textarea>
+        <span class="help-block">{{ commentMessage }}</span>
+      </div>
+      <div class="form-group col-sm-12">
+        <button type="submit" class="btn btn-primary btn-xs form-control" ng-disabled="postCommentClicked" ng-click="postComment()">Post Comment</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="empty-padding"></div>
+
 </div>
 <!-- End front page -->
