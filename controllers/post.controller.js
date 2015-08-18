@@ -96,7 +96,7 @@ exports.editPost = function(req, res) {
         var body = req.body.body;
         var category = req.body.category;
         // split tags by commas and trim all
-        var tags = req.body.tags.split(',');
+        var tags = String(req.body.tags).split(',');
         for (var i = 0; i < tags.length; i++) {
             tags[i] = tags[i].trim();
         }

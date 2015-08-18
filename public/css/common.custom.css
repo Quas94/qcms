@@ -29,6 +29,16 @@ em {
     padding-bottom: 5px;
 }
 
+.blog-post-body {
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.blog-post-body img {
+    width: 100%;
+    height: 100%;
+}
+
 .panel-footer {
     font-size: small;
     height: 25px;

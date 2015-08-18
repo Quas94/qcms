@@ -5,7 +5,7 @@
   </div>
   <div class="panel-body">
     <p class="p-author-date">posted by <em>{{post.author}}</em> on {{formatDate(post.date)}}</p>
-    <div ng-bind-html="post.body" style="padding-top:10px;padding-bottom:10px;"></div>
+    <div ng-bind-html="post.body" class="blog-post-body"></div>
     <p class="p-author-date" style="padding-bottom:0px;margin-bottom:0px;border-bottom:0px;">category: <em>{{post.category}}</em></p>
     <p class="p-author-date">tags: <span ng-repeat="tag in post.tags">{{tag}}</span></p>
   </div>
