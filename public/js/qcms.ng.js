@@ -111,8 +111,6 @@ var processTags = function(tags) {
 
 qcms.controller('additionalPageCtrl', ['$location', '$scope', '$http', 'row',
     function($location, $scope, $http, row) {
-        row.isCollapsed = false;
-
         var path = 'pages' + $location.path();
 
         // on page load, fetch content for this additional page
@@ -120,6 +118,8 @@ qcms.controller('additionalPageCtrl', ['$location', '$scope', '$http', 'row',
             .success(function(data) {
                 // console.log('content is ' + JSON.stringify(data));
                 $scope.add = data;
+                // uncollapse after data has loaded
+                row.isCollapsed = false;
             })
             .error(function(err) {
                 console.log('Error fetching additional page content: ' + err);

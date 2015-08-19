@@ -1,12 +1,15 @@
 /**
  * Controller for the homepage.
  */
-var themeModel = require('../models/theme.model');
+var ThemeModel = require('../models/theme.model');
+var config = require('../config/config');
 
 module.exports = function(req, res) {
-    var theme = themeModel.getTheme(req);
+    var theme = ThemeModel.getTheme(req);
 
     res.render('main', {
-        theme: theme
+        theme: theme,
+        title: config.blogTitle,
+        desc: config.blogDesc
     });
 };
