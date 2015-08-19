@@ -18,13 +18,17 @@ qcms.config(['$routeProvider', '$locationProvider',
                 templateUrl: '/view/blog',
                 controller: 'blogCtrl'
             }).
+            when('/projects', {
+                templateUrl: '/view/projects',
+                controller: 'additionalPageCtrl'
+            }).
             when('/about', {
                 templateUrl: '/view/about',
-                controller: 'generalCtrl'
+                controller: 'additionalPageCtrl'
             }).
             when('/contact', {
                 templateUrl: '/view/contact',
-                controller: 'generalCtrl'
+                controller: 'additionalPageCtrl'
             }).
             when('/not-found', {
                 templateUrl: '/view/not-found',
@@ -56,7 +60,7 @@ qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$interval', '$tim
             $scope.rowCollapsed = true;
             // check several times per second to see if row.isCollapsed has been set to true, and update scope if so
             var updateRow = $interval(function() {
-                console.log('Interval checking');
+                // console.log('Interval checking');
                 if (!row.isCollapsed) {
                     $interval.cancel(updateRow);
                     $timeout(function() {
@@ -105,10 +109,28 @@ var processTags = function(tags) {
     return tags;
 };
 
+qcms.controller('additionalPageCtrl', ['$location', '$scope', '$http', 'row',
+    function($location, $scope, $http, row) {
+        row.isCollapsed = false;
+
+        var path = 'pages' + $location.path();
+
+        // on page load, fetch content for this additional page
+        $http.get(path)
+            .success(function(data) {
+                // console.log('content is ' + JSON.stringify(data));
+                $scope.add = data;
+            })
+            .error(function(err) {
+                console.log('Error fetching additional page content: ' + err);
+            });
+    }]);
+
+
 qcms.controller('blogCtrl', ['$scope', '$http', 'row',
 
     function($scope, $http, row) {
-        $scope.formData = {};
+        $scope.newPostForm = {};
 
         $scope.processTags = processTags;
 
@@ -135,12 +157,12 @@ qcms.controller('blogCtrl', ['$scope', '$http', 'row',
 
         // submitting form, send post to node API
         $scope.createPost = function() {
-            var title = $scope.formData.title;
-            var body = $scope.formData.body;
+            var title = $scope.newPostForm.title;
+            var body = $scope.newPostForm.body;
             if (title != null && title.length > 0 && body != null && body.length > 0) {
-                $http.post('/post', $scope.formData)
+                $http.post('/post', $scope.newPostForm)
                     .success(function(data) {
-                        $scope.formData = {}; // clear form to prep for next entry
+                        $scope.newPostForm = {}; // clear form to prep for next entry
                         $scope.posts = data;
                     })
                     .error(function(data) {

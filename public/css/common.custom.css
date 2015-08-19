@@ -26,7 +26,7 @@ em {
 .p-author-date {
     font-size: small;
     font-style: italic;
-    padding-bottom: 5px;
+    padding-bottom: 0;
 }
 
 .blog-post-body {

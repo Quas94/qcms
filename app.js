@@ -44,6 +44,8 @@ setRoute('settings');
 // front end
 // admin
 setRoute('admin'); // includes admin and login
+// additional pages
+setRoute('pages');
 // public
 setRoute('main'); // includes home, about, ...
 setRoute('view'); // views

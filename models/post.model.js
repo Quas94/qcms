@@ -1,3 +1,9 @@
+/**
+ * Mongoose model of a blog post.
+ *
+ * @type {*|exports|module.exports}
+ */
+
 var mongoose = require('mongoose');
 
 var PostModel = mongoose.model('BlogPost', {

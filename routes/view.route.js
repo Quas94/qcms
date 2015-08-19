@@ -12,6 +12,7 @@ module.exports = function(app) {
     // individual views
     app.get(view + 'blog/:id', viewController.blogPost);
     app.get(view + 'blog', viewController.blog);
+    app.get(view + 'projects', viewController.projects);
     app.get(view + 'about', viewController.about);
     app.get(view + 'contact', viewController.contact);
 };

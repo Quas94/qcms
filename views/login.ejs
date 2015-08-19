@@ -35,8 +35,8 @@
       <form>
         <div class="form-group">
           <h2>qCMS Admin cPanel</h2>
-          <input type="text" class="form-control input-lg text-center" placeholder="username" ng-model="formData.username">
-          <input type="password" class="form-control input-lg text-center" placeholder="password" ng-model="formData.password">
+          <input type="text" class="form-control input-lg text-center" placeholder="username" ng-model="loginForm.username">
+          <input type="password" class="form-control input-lg text-center" placeholder="password" ng-model="loginForm.password">
           <p style="padding-top: 10px; color:red;">{{ message }}</p>
         </div>
         <button type="submit" class="btn btn-primary btn-lg" ng-click="login()">Login</button>

@@ -87,17 +87,50 @@
   </div>
 
   <!-- Create post form -->
-  <div id="new-post-form" class="row">
+  <div id="new-post-form" class="row" style="padding-bottom:50px;">
     <div class="col-sm-8 col-sm-offset-2 text-center">
       <form>
         <div class="form-group">
-          <input type="text" class="form-control input-lg text-center" placeholder="title" ng-model="formData.title">
-          <input type="text" class="form-control input-lg text-center" placeholder="author" ng-model="formData.author">
-          <textarea class="form-control" ng-model="formData.body" rows="5" placeholder="write your post here"></textarea>
-          <input type="text" class="form-control input-lg text-center" placeholder="category" ng-model="formData.category">
-          <input type="text" class="form-control input-lg text-center" placeholder="tags (separate, with, comma)" ng-model="formData.tags">
+          <input type="text" class="form-control input-lg text-center" placeholder="title" ng-model="newPostForm.title">
+          <input type="text" class="form-control input-lg text-center" placeholder="author" ng-model="newPostForm.author">
+          <textarea class="form-control" ng-model="newPostForm.body" rows="5" placeholder="write your post here"></textarea>
+          <input type="text" class="form-control input-lg text-center" placeholder="category" ng-model="newPostForm.category">
+          <input type="text" class="form-control input-lg text-center" placeholder="tags (separate, with, comma)" ng-model="newPostForm.tags">
         </div>
         <button type="submit" class="btn btn-primary btn-lg" ng-click="createPost()">Create Post</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Editing additional pages -->
+  <div id="pages-list" class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <!-- loop over the posts -->
+      <div class="panel panel-default" ng-repeat="page in pages">
+        <div class="panel-heading">
+          <input type="text" class="form-control" ng-model="page.page">
+          <input type="text" class="form-control" ng-model="page.title">
+        </div>
+        <div class="panel-body">
+          <p>
+            <textarea class="form-control" ng-model="page.content" rows="6"></textarea>
+          </p>
+          <button class="btn btn-xs btn-default" ng-click="editPage(page._id)">Update</button>
+          <button class="btn btn-xs btn-default" ng-click="deletePage(page._id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Create additional page form -->
+  <div id="new-page-form" class="row" style="padding-bottom:50px;">
+    <div class="col-sm-8 col-sm-offset-2 text-center">
+      <form>
+        <div class="form-group">
+          <input type="text" class="form-control input-lg text-center" placeholder="page (url path)" ng-model="newPageForm.page">
+          <input type="text" class="form-control input-lg text-center" placeholder="title (shown on panel heading)" ng-model="newPageForm.title">
+          <textarea class="form-control" ng-model="newPageForm.content" rows="5" placeholder="page content body here"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" ng-click="createPage()">Create Page</button>
       </form>
     </div>
   </div>

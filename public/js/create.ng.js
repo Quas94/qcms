@@ -7,7 +7,9 @@ var create = angular.module('create', [
 create.controller('createCtrl', ['$scope', '$http', '$window',
 
     function($scope, $http, $window) {
-        $scope.formData = {};
+        $scope.newPostForm = {};
+        $scope.newPageForm = {};
+        $scope.loginForm = {};
         $scope.message = '';
 
         // upon landing on the page, get all posts and show
@@ -21,7 +23,16 @@ create.controller('createCtrl', ['$scope', '$http', '$window',
                 }
             })
             .error(function(data) {
-                console.log('Error: ' + data);
+                console.log('Error in admincp getting all posts: ' + data);
+            });
+        // also get all pages and show
+        $http.get('/pages')
+            .success(function(data) {
+                $scope.pages = data;
+                console.log('pages: ' + JSON.stringify(data));
+            })
+            .error(function(err) {
+                console.log('Error in admincp getting all pages: ' + err);
             });
 
         // format date function, identical to the one in qcms.ng.js
@@ -39,19 +50,34 @@ create.controller('createCtrl', ['$scope', '$http', '$window',
 
         // submitting form, send post to node API
         $scope.createPost = function() {
-            var title = $scope.formData.title;
-            var body = $scope.formData.body;
+            var title = $scope.newPostForm.title;
+            var body = $scope.newPostForm.body;
             if (title != null && title.length > 0 && body != null && body.length > 0) {
-                $http.post('/post', $scope.formData)
+                $http.post('/post', $scope.newPostForm)
                     .success(function(data) {
-                        $scope.formData = {}; // clear form to prep for next entry
+                        $scope.newPostForm = {}; // clear form to prep for next entry
                         $scope.posts = data;
                     })
                     .error(function(data) {
-                        console.log('Error: ' + data);
+                        console.log('Error creating post: ' + data);
                     });
             }
             // otherwise do nothing, not long enough
+        };
+        // create page
+        $scope.createPage = function() {
+            var page = $scope.newPageForm.page;
+            if (page != null && page.length > 0) {
+                // only requirement for making a new page is the page-field is not blank
+                $http.post('/pages', $scope.newPageForm)
+                    .success(function(data) {
+                        $scope.newPageForm = {}; // clear new page form
+                        $scope.pages = data;
+                    })
+                    .error(function(err) {
+                        console.log('Error creating page: ' + err);
+                    });
+            }
         };
 
         // edit post
@@ -76,6 +102,24 @@ create.controller('createCtrl', ['$scope', '$http', '$window',
                     });
             }
         };
+        // edit page
+        $scope.editPage = function(id) {
+            var index = -1;
+            // find index of page we're editing
+            for (var i = 0; i < $scope.pages.length; i++) {
+                if ($scope.pages[i]._id === id) {
+                    index = i;
+                    break;
+                }
+            }
+            $http.post('/pages/' + id, $scope.pages[index])
+                .success(function(data) {
+                    $window.alert("Updated page successfully");
+                })
+                .error(function(err) {
+                    console.log('Error occurred editing page: ' + err);
+                });
+        };
 
         // delete post
         $scope.deletePost = function(id, title) {
@@ -88,6 +132,20 @@ create.controller('createCtrl', ['$scope', '$http', '$window',
                     })
                     .error(function(err) {
                         console.log('Error occurred deleting post: ' + err);
+                    });
+            }
+        };
+        // delete page
+        $scope.deletePage = function(id) {
+            var confirm = $window.confirm("Deleting page, confirm?");
+            // if 'ok' clicked, actually send request to server to delete post
+            if (confirm) {
+                $http.delete('/pages/' + id)
+                    .success(function(data) {
+                        $scope.pages = data;
+                    })
+                    .error(function(err) {
+                        console.log('Error occurred deleting page: ' + err);
                     });
             }
         };
@@ -117,8 +175,8 @@ create.controller('createCtrl', ['$scope', '$http', '$window',
         // login
         $scope.login = function() {
             $http.post('/login', {
-                username: $scope.formData.username,
-                password: $scope.formData.password
+                username: $scope.loginForm.username,
+                password: $scope.loginForm.password
             }).success(function(data) {
                 if (data === 'Success') {
                     $window.location.href = '/admin';
