@@ -9,6 +9,7 @@ create.controller('createCtrl', ['$scope', '$http', '$window',
     function($scope, $http, $window) {
         $scope.newPostForm = {};
         $scope.newPageForm = {};
+        $scope.sidebarForm = {}; // TODO: sidebar content save in db
         $scope.loginForm = {};
         $scope.message = '';
 

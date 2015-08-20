@@ -19,6 +19,22 @@ em {
     font-size: larger;
 }
 
+.main-content-div {
+    padding-bottom: 15px;
+}
+
+.justify {
+    text-align: justify;
+}
+
+.btn-change-theme {
+    padding: 5px 5px;
+}
+
+a {
+    color: rgba(0, 102, 204, 1.0);
+}
+
 .help-block {
     color: #ff0000;
 }

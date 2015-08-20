@@ -10,4 +10,4 @@ exports.getTheme = function(req) {
     }
     var theme = req.session.theme;
     return theme;
-}
+};

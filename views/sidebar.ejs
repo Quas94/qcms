@@ -1,21 +1,39 @@
 <!-- Panel 1 of sidebar -->
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Sidebar</h3>
+    <h3 class="panel-title">Search</h3>
   </div>
   <div class="panel-body">
-    <p>This is the sidebar, to be filled with wonderful navigational tools.</p>
+    <p>
+    <div class="input-group col-md-12">
+      <input type="text" class="form-control input-sm" placeholder="under construction" />
+      <span class="input-group-btn">
+          <button class="btn btn-default btn-sm" type="button">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+      </span>
+    </div>
+    </p>
   </div>
 </div>
-<!-- End panel 1 of sidebar -->
 <!-- Panel 2 of sidebar -->
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Theme</h3>
   </div>
   <div class="panel-body">
-    <p>Current theme: <%= theme %></p>
-    <p>The change theme button has been shifted to the far right of the menu bar, above.</p>
+    <p style="text-align:center;">Current theme: <%= theme %></p>
+    <p style="text-align:center;"><a href="#" class="btn btn-default btn-sm btn-change-theme" ng-click="changeTheme();">Change theme!</a></p>
   </div>
 </div>
 <!-- End panel 2 of sidebar -->
+<!-- Panel 3 of sidebar -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Powered by what?</h3>
+  </div>
+  <div class="panel-body">
+    <p class="justify">This isn't Wordpress... <a href="projects#qcms">what is qCMS?</a></p>
+  </div>
+</div>
+<!-- End panel 3 of sidebar -->
