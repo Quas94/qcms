@@ -4,6 +4,8 @@
 
 var PagesModel = require('../models/pages.model').model;
 
+var util = require('../tools/util');
+
 exports.getAdditionalPage = function(req, res) {
     console.log('fetching ' + req.params.pageId);
     PagesModel.findOne({
@@ -31,7 +33,7 @@ exports.createPage = function(req, res) {
         PagesModel.create({
             page: req.body.page,
             title: req.body.title,
-            content: req.body.content
+            content: util.splitIntoParagraphs(req.body.content)
         }, function(err, pages) {
             if (err) res.send(err);
             getAllAdditionalPagesInternal(req, res);

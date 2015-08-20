@@ -4,6 +4,8 @@
 
 var PostModel = require('../models/post.model').model;
 
+var util = require('../tools/util');
+
 var getPostsInternal = function(req, res) {
     PostModel.find(function(err, posts) {
         if (err) res.send(err);
@@ -35,10 +37,10 @@ exports.createComment = function(req, res) {
     if (typeof author === 'string' && typeof body === 'string') {
         // if not logged in as admin, prevent html markup in comment
         if (req.session.loggedIn != true) {
-            body = convertSymbols(body);
+            body = util.convertSymbols(body);
         }
         // split up body into paragraphs according to double newline
-        body = splitIntoParagraphs(body);
+        body = util.splitIntoParagraphs(body);
 
         // actually update db
         PostModel.findOneAndUpdate({
@@ -80,7 +82,7 @@ exports.createPost = function(req, res) {
         PostModel.create({
             title: req.body.title,
             path: path,
-            body: splitIntoParagraphs(req.body.body),
+            body: util.splitIntoParagraphs(req.body.body),
             author: req.body.author,
             date: Date.now(),
             category: req.body.category,
@@ -167,30 +169,3 @@ exports.deleteComment = function(req, res) {
         }
     }
 };
-
-/**
- * Splits a body of text into paragraphs (adding p tag html markup) by splitting over double newline characters.
- */
-function splitIntoParagraphs(body) {
-    body = body.split('\n\n');
-    var paragraphs = '';
-    for (var i = 0; i < body.length; i++) {
-        paragraphs = paragraphs.concat('<p>' + body[i] + '</p>');
-    }
-    return paragraphs;
-}
-
-/**
- * Converts HTML markup symbols into their respective &lt; and &gt; notations. Used for comments only, as admin posts
- * can embed HTML tags freely.
- */
-function convertSymbols(body) {
-    // ampersand first because it's contained in the &symbols;
-    body = body.replace(new RegExp('&', 'g'), '&amp;');
-    // then the rest
-    body = body.replace(new RegExp('<', 'g'), '&lt;');
-    body = body.replace(new RegExp('>', 'g'), '&gt;');
-    body = body.replace(new RegExp('\'', 'g'), '&apos;');
-    body = body.replace(new RegExp('"', 'g'), '&quot;');
-    return body;
-}

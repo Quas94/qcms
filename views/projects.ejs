@@ -6,7 +6,7 @@
   <!-- panel-body-wrapper div necessary to prevent jumpy animation of collapse due to panel padding -->
   <div class="no-padding-div">
     <div class="panel-body">
-      <p>{{ add.content }}</p>
+      <div ng-bind-html="add.content"></div>
     </div>
   </div>
 </div>
