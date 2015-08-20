@@ -2,11 +2,17 @@
  * Controller for views. Renders requested view
  */
 var ThemeModel = require('../models/theme.model');
+var config = require('../config/config');
 
 exports.sidebar = function(req, res) {
     var theme = ThemeModel.getTheme(req);
     res.render('sidebar', {
-        theme: theme
+        theme: theme,
+
+        // contact links
+        twitterLink: config.twitterLink,
+        linkedinLink: config.linkedinLink,
+        emailAddress: config.emailAddress
     });
 }
 

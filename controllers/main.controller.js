@@ -11,5 +11,7 @@ module.exports = function(req, res) {
         theme: theme,
         title: config.blogTitle,
         desc: config.blogDesc
+
+        // sidebar variables are listed in view.controller
     });
 };

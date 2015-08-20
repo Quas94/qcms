@@ -16,7 +16,23 @@
     </p>
   </div>
 </div>
+
 <!-- Panel 2 of sidebar -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Contact</h3>
+  </div>
+  <div class="panel-body">
+    <p class="center">
+      <!-- TODO: define these in database and adjust via admincp -->
+      <a target="_blank" href="<%= twitterLink %>"><img class="img-contact" src="images/twitter.png" /></a>
+      <a target="_blank" href="<%= linkedinLink %>"><img class="img-contact" src="images/linkedin.png" /></a>
+      <a href="mailto:<%= emailAddress %>"><img class="img-contact" src="images/email.png" /></a>
+    </p>
+  </div>
+</div>
+
+<!-- Panel 3 of sidebar -->
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Theme</h3>
@@ -26,8 +42,22 @@
     <p style="text-align:center;"><a href="#" class="btn btn-default btn-sm btn-change-theme" ng-click="changeTheme();">Change theme!</a></p>
   </div>
 </div>
-<!-- End panel 2 of sidebar -->
-<!-- Panel 3 of sidebar -->
+
+<!-- Panel 4 of sidebar -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Categories</h3>
+  </div>
+  <div class="panel-body">
+    <ul style="text-align:left;">
+        <li>category 1</li>
+        <li>category 2</li>
+        <li>category 3</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Panel 5 of sidebar -->
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Powered by what?</h3>
@@ -36,4 +66,3 @@
     <p class="justify">This isn't Wordpress... <a href="projects#qcms">what is qCMS?</a></p>
   </div>
 </div>
-<!-- End panel 3 of sidebar -->

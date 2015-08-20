@@ -1,7 +1,7 @@
 /** Custom CSS for the dark theme only. Overrides common */
 
 body {
-    background-image: url('../images/dark.background.jpg');
+    background-image: url('../images/background.dark.jpg');
 }
 
 .p-author-date {
@@ -14,4 +14,12 @@ body {
 
 .post-link:link, .post-link:hover, .post-link:active, .post-link:visited {
     color: rgba(255, 255, 255, 0.4);
+}
+
+#header-jumbotron {
+    background-image: url('../images/jumbo.dark.png');
+}
+
+#jumbo-desc {
+    color: #ffffff;
 }
