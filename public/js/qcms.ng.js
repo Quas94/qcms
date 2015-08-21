@@ -198,7 +198,6 @@ qcms.controller('blogPostCtrl', ['$scope', '$http', '$location', 'row',
 
         var path = $location.path();
         path = path.replace('/blog', '');
-        $scope.postId = path.replace('/', '');
         path = '/post' + path;
 
         // upon page load, fetch info for this blog post
@@ -227,7 +226,7 @@ qcms.controller('blogPostCtrl', ['$scope', '$http', '$location', 'row',
             var author = $scope.commentData.author;
             var comment = $scope.commentData.body;
             if (author != undefined && author.length > 0 && comment != undefined && comment.length > 0) {
-                $http.post('/post/' + $scope.postId + '/comment', {
+                $http.post('/post/' + $scope.post._id + '/comment', {
                     author: $scope.commentData.author,
                     body: $scope.commentData.body
                 }).success(function (data) {

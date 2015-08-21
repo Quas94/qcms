@@ -10,7 +10,7 @@
     <p class="p-author-date">tags: <span ng-repeat="tag in post.tags">{{tag}}</span></p>
   </div>
   <div class="panel-footer">
-    <a class="post-link" href="/blog/{{post._id}}">{{post.comments.length}} comment{{getTrailingS(post);}}</a>
+    <a class="post-link" href="/blog/{{post.path}}">{{post.comments.length}} comment{{getTrailingS(post);}}</a>
   </div>
 </div>
 <!-- End front page -->

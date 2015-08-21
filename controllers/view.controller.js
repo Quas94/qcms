@@ -10,9 +10,7 @@ exports.sidebar = function(req, res) {
         theme: theme,
 
         // contact links
-        twitterLink: config.twitterLink,
-        linkedinLink: config.linkedinLink,
-        emailAddress: config.emailAddress
+        contacts: config.contacts
     });
 }
 

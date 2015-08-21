@@ -12,6 +12,10 @@ exports.blogDesc = 'a rookie content management platform written in an attempt t
     'full-stack (MongoDB, Express, Angular and Node) as well as Bootstrap and a bit of jQuery.';
 
 /** Contact information/links */
-exports.twitterLink = "http://www.twitter.com/";
-exports.linkedinLink = "http://www.linkedin.com/";
-exports.emailAddress = "address@domain.com";
+exports.contacts = {
+    twitter: "http://www.twitter.com/",
+    linkedin: "http://www.linkedin.com/",
+    facebook: "http://www.facebook.com/",
+    youtube: "http://www.youtube.com/",
+    email: "address@domain.com"
+};
