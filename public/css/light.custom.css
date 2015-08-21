@@ -2,6 +2,7 @@
 
 body {
     background-image: url('../images/background.light.jpg');
+
 }
 
 .p-author-date {
@@ -22,6 +23,14 @@ body {
 
 .panel {
     background-color: rgba(255,255,255,0.4);
+}
+
+.list-group-item {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.glyphicon-arrow-right {
+    color: rgba(0,0,0,0.6);
 }
 
 #footer-well {

@@ -26,10 +26,6 @@ qcms.config(['$routeProvider', '$locationProvider',
                 templateUrl: '/view/about',
                 controller: 'additionalPageCtrl'
             }).
-            when('/contact', {
-                templateUrl: '/view/contact',
-                controller: 'additionalPageCtrl'
-            }).
             when('/not-found', {
                 templateUrl: '/view/not-found',
                 controller: 'generalCtrl'
