@@ -24,10 +24,11 @@
   </div>
   <div class="panel-body">
     <p class="center">
-      <a target="_blank" href="<%= contacts.twitter %>"><img class="img-contact" src="images/twitter.png" /></a>
-      <a target="_blank" href="<%= contacts.linkedin %>"><img class="img-contact" src="images/linkedin.png" /></a>
-      <a target="_blank" href="<%= contacts.facebook %>"><img class="img-contact" src="images/facebook.png" /></a>
-      <a href="<%= contacts.youtube %>"><img class="img-contact" src="images/youtube.png" /></a>
+      <a <%= contactsNewWindow.twitter %> href="<%= contacts.twitter %>"><img class="img-contact" src="images/twitter.png" /></a>
+      <a <%= contactsNewWindow.linkedin %> href="<%= contacts.linkedin %>"><img class="img-contact" src="images/linkedin.png" /></a>
+      <a <%= contactsNewWindow.facebook %> href="<%= contacts.facebook %>"><img class="img-contact" src="images/facebook.png" /></a>
+      <a <%= contactsNewWindow.youtube %> href="<%= contacts.youtube %>"><img class="img-contact" src="images/youtube.png" /></a>
+      <!-- no new window for mail at all -->
       <a href="mailto:<%= contacts.email %>"><img class="img-contact" src="images/email.png" /></a>
     </p>
   </div>

@@ -31,9 +31,8 @@ em {
     text-align: center;
 }
 
-.image-contact {
-    padding-left: 5px;
-    padding-right: 5px;
+.img-contact {
+    padding: 2px 0;
 }
 
 .btn-change-theme {
