@@ -14,6 +14,7 @@ exports.blogDesc = 'a rookie content management platform written in an attempt t
 /** Contact information/links */
 var NONE = '#'; // constant meaning no link for this social media
 exports.contacts = {
+    github: "http://www.github.com/",
     twitter: "http://www.twitter.com/",
     linkedin: "http://www.linkedin.com/",
     facebook: 'http://www.facebook.com/',

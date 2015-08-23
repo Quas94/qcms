@@ -19,6 +19,10 @@ em {
     font-size: larger;
 }
 
+h4 {
+    padding-bottom: 5px;
+}
+
 .main-content-div {
     padding-bottom: 15px;
 }
@@ -80,6 +84,11 @@ a {
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 20px;
+}
+
+#panel-contact {
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .no-padding-div {

@@ -22,14 +22,15 @@
   <div class="panel-heading">
     <h3 class="panel-title">Contact</h3>
   </div>
-  <div class="panel-body">
+  <div class="panel-body" id="panel-contact">
     <p class="center">
-      <a <%= contactsNewWindow.twitter %> href="<%= contacts.twitter %>"><img class="img-contact" src="images/twitter.png" /></a>
-      <a <%= contactsNewWindow.linkedin %> href="<%= contacts.linkedin %>"><img class="img-contact" src="images/linkedin.png" /></a>
-      <a <%= contactsNewWindow.facebook %> href="<%= contacts.facebook %>"><img class="img-contact" src="images/facebook.png" /></a>
-      <a <%= contactsNewWindow.youtube %> href="<%= contacts.youtube %>"><img class="img-contact" src="images/youtube.png" /></a>
+      <a <%= contactsNewWindow.github %> href="<%= contacts.github %>"><img class="img-contact" title="Github" src="images/github.png" /></a>
+      <a <%= contactsNewWindow.twitter %> href="<%= contacts.twitter %>"><img class="img-contact" title="Twitter" src="images/twitter.png" /></a>
+      <a <%= contactsNewWindow.linkedin %> href="<%= contacts.linkedin %>"><img class="img-contact" title="LinkedIn" src="images/linkedin.png" /></a>
+      <a <%= contactsNewWindow.facebook %> href="<%= contacts.facebook %>"><img class="img-contact" title="Facebook" src="images/facebook.png" /></a>
+      <a <%= contactsNewWindow.youtube %> href="<%= contacts.youtube %>"><img class="img-contact" title="YouTube" src="images/youtube.png" /></a>
       <!-- no new window for mail at all -->
-      <a href="mailto:<%= contacts.email %>"><img class="img-contact" src="images/email.png" /></a>
+      <a href="mailto:<%= contacts.email %>"><img class="img-contact" title="Email" src="images/email.png" /></a>
     </p>
   </div>
 </div>
