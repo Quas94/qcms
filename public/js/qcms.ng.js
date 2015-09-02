@@ -43,17 +43,25 @@ qcms.factory('row', function() {
     return rowService;
 });
 
-qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$interval', '$timeout', '$location', '$window', 'row',
-    function($scope, $http, $rootScope, $interval, $timeout, $location, $window, row) {
+qcms.factory('title', function() {
+    var titleService = {};
+    titleService.titleBase = 'TITLE_BASE_THIS_SHOULD_NEVER_APPEAR';
+    titleService.titleSet = false; // flag for communication between blogPostCtrl and mainCtrl controllers
+    return titleService;
+});
+
+qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$interval', '$timeout', '$location', '$window', 'row', 'title',
+    function($scope, $http, $rootScope, $interval, $timeout, $location, $window, row, title) {
         $scope.navbarCollapsed = true;
         $scope.rowCollapsed = row.isCollapsed;
         // save the base title text
-        $scope.titleBase = $window.document.title.replace(' - Not Found', '');
+        title.titleBase = $window.document.title.replace(' - Not Found', '');
         console.log("base title is " + $scope.titleBase);
         // callback for location change events
         $rootScope.$on('$locationChangeStart', function(event, newUrl, oldUrl) {
-            // set title back to base
-            $window.document.title = $scope.titleBase;
+            // set title back to base, and titleSet flag to false
+            $window.document.title = title.titleBase;
+            title.titleSet = false;
             // set row collapsed flags for both this scope and globally to true
             row.isCollapsed = true;
             $scope.rowCollapsed = true;
@@ -62,22 +70,23 @@ qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$interval', '$tim
                 // console.log('Interval checking');
                 if (!row.isCollapsed) {
                     $interval.cancel(updateRow);
-                    $timeout(function() { // we have loaded
-                        // work out suffix
-                        var path = $location.path();
-                        var lastIndex = path.lastIndexOf('/');
-                        var line = path.substr(lastIndex + 1); // make line = everything after last slash
-                        var words = line.split('-'); // split over dashes
-                        var suffix = '';
-                        for (var i = 0; i < words.length; i++) {
-                            var firstUpper = words[i].substr(0, 1).toUpperCase();
-                            var rest = words[i].substr(1);
-                            var processedWord = firstUpper + rest; // capitalise first letter of each word
-                            suffix += processedWord + ' '; // string onto suffix
+                    $timeout(function() { // just loaded
+                        if (!title.titleSet) { // check that title wasn't already set by the blogPostCtrl
+                            // work out suffix - this code is for pages with multiple words
+                            // the following code is irrelevant for blog post page, for which blogCtrl sets title
+                            var path = $location.path();
+                            var lastIndex = path.lastIndexOf('/');
+                            var line = path.substr(lastIndex + 1); // make line = everything after last slash
+                            var words = line.split('-'); // split over dashes
+                            var suffix = '';
+                            for (var i = 0; i < words.length; i++) {
+                                var firstUpper = words[i].substr(0, 1).toUpperCase();
+                                var rest = words[i].substr(1);
+                                var processedWord = firstUpper + rest; // capitalise first letter of each word
+                                suffix += processedWord + ' '; // string onto suffix
+                            }
+                            $window.document.title = title.titleBase + ' - ' + suffix; // set title with suffix
                         }
-
-                        // set title with suffix
-                        $window.document.title = $scope.titleBase + ' - ' + suffix;
                         // de-collapse row
                         $scope.rowCollapsed = false;
                     }, 100);
@@ -205,8 +214,8 @@ qcms.controller('blogCtrl', ['$scope', '$http', 'row',
         };
     }]);
 
-qcms.controller('blogPostCtrl', ['$scope', '$http', '$location', 'row',
-    function($scope, $http, $location, row) {
+qcms.controller('blogPostCtrl', ['$window', '$scope', '$http', '$location', 'row', 'title',
+    function($window, $scope, $http, $location, row, title) {
         $scope.commentData = {};
         $scope.postCommentClicked = false;
         $scope.commentMessage = '';
@@ -224,6 +233,11 @@ qcms.controller('blogPostCtrl', ['$scope', '$http', '$location', 'row',
                 $scope.post = data[0];
                 // fix tags formatting
                 $scope.post.tags = processTags($scope.post.tags);
+                // set window title
+                $window.document.title = title.titleBase + ' - ' + $scope.post.title;
+                // set titleSet flag to true, so that mainCtrl doesn't override the line above
+                title.titleSet = true;
+                // console.log("Trying to set title to " + $scope.post.title);
 
                 // set row service collapsed to false
                 row.isCollapsed = false;

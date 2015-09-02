@@ -7,7 +7,6 @@ var PagesModel = require('../models/pages.model').model;
 var util = require('../tools/util');
 
 exports.getAdditionalPage = function(req, res) {
-    console.log('fetching ' + req.params.pageId);
     PagesModel.findOne({
         page: req.params.pageId
     }, function (err, add) {
