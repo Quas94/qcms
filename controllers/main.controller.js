@@ -9,6 +9,7 @@ module.exports = function(req, res) {
 
     res.render('main', {
         theme: theme,
+        headTitle: config.headTitle,
         title: config.blogTitle,
         desc: config.blogDesc
 

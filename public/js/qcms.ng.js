@@ -39,9 +39,7 @@ qcms.config(['$routeProvider', '$locationProvider',
 
 qcms.factory('row', function() {
     var rowService = {};
-
     rowService.isCollapsed = true; // initialises to collapsed
-
     return rowService;
 });
 
@@ -60,6 +58,7 @@ qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$interval', '$tim
                 if (!row.isCollapsed) {
                     $interval.cancel(updateRow);
                     $timeout(function() {
+                        // de-collapse row
                         $scope.rowCollapsed = false;
                     }, 100);
                 }
