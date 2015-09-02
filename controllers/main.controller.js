@@ -8,6 +8,7 @@ module.exports = function(req, res) {
     var theme = ThemeModel.getTheme(req);
 
     res.render('main', {
+        // NOTE: if adding things to this template, also need to change in notfound.controller
         theme: theme,
         headTitle: config.headTitle,
         title: config.blogTitle,

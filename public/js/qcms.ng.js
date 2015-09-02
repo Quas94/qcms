@@ -47,8 +47,13 @@ qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$interval', '$tim
     function($scope, $http, $rootScope, $interval, $timeout, $location, $window, row) {
         $scope.navbarCollapsed = true;
         $scope.rowCollapsed = row.isCollapsed;
+        // save the base title text
+        $scope.titleBase = $window.document.title.replace(' - Not Found', '');
+        console.log("base title is " + $scope.titleBase);
         // callback for location change events
         $rootScope.$on('$locationChangeStart', function(event, newUrl, oldUrl) {
+            // set title back to base
+            $window.document.title = $scope.titleBase;
             // set row collapsed flags for both this scope and globally to true
             row.isCollapsed = true;
             $scope.rowCollapsed = true;
@@ -57,7 +62,22 @@ qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$interval', '$tim
                 // console.log('Interval checking');
                 if (!row.isCollapsed) {
                     $interval.cancel(updateRow);
-                    $timeout(function() {
+                    $timeout(function() { // we have loaded
+                        // work out suffix
+                        var path = $location.path();
+                        var lastIndex = path.lastIndexOf('/');
+                        var line = path.substr(lastIndex + 1); // make line = everything after last slash
+                        var words = line.split('-'); // split over dashes
+                        var suffix = '';
+                        for (var i = 0; i < words.length; i++) {
+                            var firstUpper = words[i].substr(0, 1).toUpperCase();
+                            var rest = words[i].substr(1);
+                            var processedWord = firstUpper + rest; // capitalise first letter of each word
+                            suffix += processedWord + ' '; // string onto suffix
+                        }
+
+                        // set title with suffix
+                        $window.document.title = $scope.titleBase + ' - ' + suffix;
                         // de-collapse row
                         $scope.rowCollapsed = false;
                     }, 100);
