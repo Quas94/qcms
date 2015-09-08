@@ -22,7 +22,8 @@ var PostModel = mongoose.model('BlogPost', {
         author: String,
         body: String,
         date: Date
-    }]
+    }],
+    draft: Boolean
 });
 
 exports.model = PostModel;

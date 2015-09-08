@@ -7,7 +7,11 @@ var PostModel = require('../models/post.model').model;
 var util = require('../tools/util');
 
 var getPostsInternal = function(req, res) {
-    PostModel.find(function(err, posts) {
+    var conditions = {};
+    if (!req.session.loggedIn) { // if not logged in, only show non-draft posts
+        conditions.draft = false;
+    }
+    PostModel.find(conditions, function(err, posts) {
         if (err) res.send(err);
 
         res.json(posts);
@@ -17,9 +21,13 @@ var getPostsInternal = function(req, res) {
 exports.getPosts = getPostsInternal;
 
 var getSinglePostInternal = function(req, res) {
-    PostModel.find({
+    var conditions = {
         path: req.params.postId
-    }, function(err, post) {
+    };
+    if (!req.session.loggedIn) { // if not logged in, only show non-draft posts
+        conditions.draft = false;
+    }
+    PostModel.find(conditions, function (err, post) {
         if (err) res.send(err);
 
         res.json(post);
@@ -68,6 +76,9 @@ exports.createComment = function(req, res) {
  */
 exports.createPost = function(req, res) {
     if (req.session.loggedIn === true) {
+        // draft status
+        var draft = req.body.draft;
+        if (draft === undefined) draft = false;
         // split tags by commas and trim all
         var tags = req.body.tags.split(',');
         for (var i = 0; i < tags.length; i++) {
@@ -86,7 +97,8 @@ exports.createPost = function(req, res) {
             author: req.body.author,
             date: Date.now(),
             category: req.body.category,
-            tags: tags
+            tags: tags,
+            draft: draft
         }, function (err, posts) {
             if (err) res.send(err);
             getPostsInternal(req, res);
@@ -105,6 +117,8 @@ exports.editPost = function(req, res) {
         var path = req.body.path;
         var body = req.body.body;
         var category = req.body.category;
+        var draft = req.body.draft;
+        if (draft === undefined) draft = false;
         // split tags by commas and trim all
         var tags = String(req.body.tags).split(',');
         for (var i = 0; i < tags.length; i++) {
@@ -119,7 +133,8 @@ exports.editPost = function(req, res) {
             path: path,
             body: body,
             category: category,
-            tags: tags
+            tags: tags,
+            draft: draft
         }, {
             new: true // make this query return updated post
         }, function(err, post) {

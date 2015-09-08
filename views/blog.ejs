@@ -1,7 +1,9 @@
 <!-- Front page -->
 <div class="panel panel-default panel-main" ng-repeat="post in posts">
   <div class="panel-heading">
-    <a class="post-link" href="/blog/{{post.path}}"><h3 class="panel-title post-link">{{post.title}}</h3></a>
+    <a class="post-link" href="/blog/{{post.path}}">
+      <h3 class="panel-title post-link">{{post.title}} {{titleDraftText(post.draft)}}</h3>
+    </a>
   </div>
   <div class="panel-body">
     <p class="p-author-date">posted by <em>{{post.author}}</em> on {{formatDate(post.date)}}</p>

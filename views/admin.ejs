@@ -39,11 +39,17 @@
     html {
       overflow-y: scroll;
     }
+
     body {
       padding-top: 50px;
     }
+
     #posts-list {
       margin-bottom: 30px;
+    }
+
+    .align-right {
+      float: right;
     }
   </style>
 </head>
@@ -51,7 +57,7 @@
 <div class="container">
   <!-- Header and post count -->
   <div class="jumbotron text-center">
-    <h1>qCMS Admin cPanel</h1>
+    <h1>qCMS Admin cPanel <a href="logout">[logout]</a></h1>
   </div>
 
   <!-- Posts list -->
@@ -72,6 +78,7 @@
           <button class="btn btn-xs btn-default" ng-click="editPost(post._id)">Update</button>
           <button class="btn btn-xs btn-default" ng-click="deletePost(post._id, post.title)">Delete</button>
           <span>Initially written on {{ formatDate(post.date) }}</span>
+          <label class="align-right"><input type="checkbox" ng-model="post.draft"> Draft Post</label>
         </div>
         <div class="panel-heading"><button class="btn btn-xs btn-default" ng-click="post.collapsed = !post.collapsed;">{{ post.collapsed ? '+' : '-' }}</button> Comments</div>
         <div class="panel-body" collapse="post.collapsed">
@@ -96,6 +103,7 @@
           <textarea class="form-control" ng-model="newPostForm.body" rows="5" placeholder="write your post here"></textarea>
           <input type="text" class="form-control input-lg text-center" placeholder="category" ng-model="newPostForm.category">
           <input type="text" class="form-control input-lg text-center" placeholder="tags (separate, with, comma)" ng-model="newPostForm.tags">
+          <label><input type="checkbox" class="form-control" ng-model="newPostForm.draft"> Draft Post</label>
         </div>
         <button type="submit" class="btn btn-primary btn-lg" ng-click="createPost()">Create Post</button>
       </form>

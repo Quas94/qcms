@@ -50,13 +50,23 @@ qcms.factory('title', function() {
     return titleService;
 });
 
+qcms.factory('titleDraft', function() {
+    var titleDraft = function(draft) {
+        if (draft) { // if draft, return admin draft text alert
+            return '[draft post - admin mode]';
+        }
+        return ''; // empty otherwise
+    };
+    return titleDraft;
+});
+
 qcms.controller('mainCtrl', ['$scope', '$http', '$rootScope', '$interval', '$timeout', '$location', '$window', 'row', 'title',
     function($scope, $http, $rootScope, $interval, $timeout, $location, $window, row, title) {
         $scope.navbarCollapsed = true;
         $scope.rowCollapsed = row.isCollapsed;
         // save the base title text
         title.titleBase = $window.document.title.replace(' - Not Found', '');
-        console.log("base title is " + $scope.titleBase);
+        // console.log("base title is " + $scope.titleBase); // TODO why is titleBase undefined here?
         // callback for location change events
         $rootScope.$on('$locationChangeStart', function(event, newUrl, oldUrl) {
             // set title back to base, and titleSet flag to false
@@ -151,9 +161,9 @@ qcms.controller('additionalPageCtrl', ['$location', '$scope', '$http', 'row',
     }]);
 
 
-qcms.controller('blogCtrl', ['$scope', '$http', 'row',
+qcms.controller('blogCtrl', ['$scope', '$http', 'row', 'titleDraft',
 
-    function($scope, $http, row) {
+    function($scope, $http, row, titleDraft) {
         $scope.newPostForm = {};
 
         $scope.processTags = processTags;
@@ -212,10 +222,13 @@ qcms.controller('blogCtrl', ['$scope', '$http', 'row',
             if (post.comments.length == 1) return '';
             return 's';
         };
+
+        // if given draft = true, means we're logged in admin, this function returns text to display after title
+        $scope.titleDraftText = titleDraft;
     }]);
 
-qcms.controller('blogPostCtrl', ['$window', '$scope', '$http', '$location', 'row', 'title',
-    function($window, $scope, $http, $location, row, title) {
+qcms.controller('blogPostCtrl', ['$window', '$scope', '$http', '$location', 'row', 'title', 'titleDraft',
+    function($window, $scope, $http, $location, row, title, titleDraft) {
         $scope.commentData = {};
         $scope.postCommentClicked = false;
         $scope.commentMessage = '';
@@ -271,4 +284,7 @@ qcms.controller('blogPostCtrl', ['$window', '$scope', '$http', '$location', 'row
                 $scope.commentMessage = 'Invalid comment input. Please check your response and try again.';
             }
         }
+
+        // title draft admin alert
+        $scope.titleDraftText = titleDraft;
     }]);

@@ -19,7 +19,6 @@ module.exports = function(app) {
         }
     });
 
-    // TODO: make config file for password
     app.post('/login', function(req, res) {
         var username = config.adminUser;
         var password = config.adminPass;
@@ -29,5 +28,10 @@ module.exports = function(app) {
         } else {
             res.send('Invalid login');
         }
+    });
+
+    app.get('/logout', function(req, res) {
+        req.session.loggedIn = false;
+        res.redirect('/blog'); // redirect to home (blog) page
     });
 };
