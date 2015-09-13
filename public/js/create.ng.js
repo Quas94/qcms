@@ -30,7 +30,7 @@ create.controller('createCtrl', ['$scope', '$http', '$window',
         $http.get('/pages')
             .success(function(data) {
                 $scope.pages = data;
-                console.log('pages: ' + JSON.stringify(data));
+                // console.log('pages: ' + JSON.stringify(data));
             })
             .error(function(err) {
                 console.log('Error in admincp getting all pages: ' + err);
