@@ -2,8 +2,8 @@
  * Controller for post-related stuff
  */
 
-// constant for number of posts to be displayed per page. affects admincp as well as general blog
-var POSTS_PER_PAGE = 10;
+// required for the 'posts per page' setting
+var POSTS_PER_PAGE = require('../config/config').postsPerPage;
 
 var PostModel = require('../models/post.model').model;
 
