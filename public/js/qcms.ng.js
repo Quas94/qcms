@@ -169,13 +169,11 @@ qcms.controller('blogCtrl', ['$scope', '$http', 'row', 'titleDraft',
         $scope.processTags = processTags;
 
         // upon landing on the page, get all posts and show
-        $http.get('/post')
+        var page = 1;
+        $http.get('/post/page/' + page)
             .success(function(data) {
-                // sort posts in order of post date, newest first
-                data.sort(function(a, b) {
-                    return new Date(b.date) - new Date(a.date);
-                });
-
+                console.log('length = ' + data.length);
+                // posts should arrive from the server already sorted from newest to oldest
                 // show posts
                 $scope.posts = data;
                 // fix tags commas

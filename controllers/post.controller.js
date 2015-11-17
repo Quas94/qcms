@@ -2,19 +2,31 @@
  * Controller for post-related stuff
  */
 
+// constant for number of posts to be displayed per page. affects admincp as well as general blog
+var POSTS_PER_PAGE = 10;
+
 var PostModel = require('../models/post.model').model;
 
 var util = require('../tools/util');
 
 var getPostsInternal = function(req, res) {
+    var page = req.params.page;
+    var skip = (page - 1) * POSTS_PER_PAGE;
     var conditions = {};
     if (!req.session.loggedIn) { // if not logged in, only show non-draft posts
         conditions.draft = false;
     }
-    PostModel.find(conditions, function(err, posts) {
-        if (err) res.send(err);
+    PostModel.count(conditions).exec(function(err, count) {
+        var numPages = Math.floor(count / 10) + (count % 10 != 0 ? 1 : 0); // additional page if any left over
+        if (page < 1 || page > numPages) { // if the page is invalid
+            res.json({}); // respond with empty json object
+            return; // early return - we already responded
+        }
+        PostModel.find(conditions).sort({date: 'desc'}).skip(skip).limit(POSTS_PER_PAGE).exec(function (err, posts) {
+            if (err) res.send(err);
 
-        res.json(posts);
+            res.json(posts);
+        });
     });
 };
 
@@ -127,7 +139,7 @@ exports.editPost = function(req, res) {
         var tags = [];
         // split tags by commas and trim all
         if (req.body.tags !== undefined) {
-            tags = req.body.tags.split(',');
+            tags = String(req.body.tags).split(',');
         }
         for (var i = 0; i < tags.length; i++) {
             tags[i] = tags[i].trim();

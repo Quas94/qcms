@@ -13,9 +13,14 @@ create.controller('createCtrl', ['$scope', '$http', '$window',
         $scope.loginForm = {};
         $scope.message = '';
 
+        $scope.pageSelect = 'page select';
+
+        var page = 1;
+
         // upon landing on the page, get all posts and show
-        $http.get('/post')
+        $http.get('/post/page/' + page)
             .success(function(data) {
+                // data should arrive sorted in the correct order already
                 // show posts
                 $scope.posts = data;
                 // set all comments to be collapsed to begin with
