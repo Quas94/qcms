@@ -79,8 +79,12 @@ exports.createPost = function(req, res) {
         // draft status
         var draft = req.body.draft;
         if (draft === undefined) draft = false;
+        // initialise local tags as empty array
+        var tags = [];
         // split tags by commas and trim all
-        var tags = req.body.tags.split(',');
+        if (req.body.tags !== undefined) {
+            tags = req.body.tags.split(',');
+        }
         for (var i = 0; i < tags.length; i++) {
             tags[i] = tags[i].trim();
         }
@@ -119,8 +123,12 @@ exports.editPost = function(req, res) {
         var category = req.body.category;
         var draft = req.body.draft;
         if (draft === undefined) draft = false;
+        // initialise local tags as empty array
+        var tags = [];
         // split tags by commas and trim all
-        var tags = String(req.body.tags).split(',');
+        if (req.body.tags !== undefined) {
+            tags = req.body.tags.split(',');
+        }
         for (var i = 0; i < tags.length; i++) {
             tags[i] = tags[i].trim();
         }
